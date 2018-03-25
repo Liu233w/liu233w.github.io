@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>windows 下用来快速启动 emacs client 的脚本 | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>windows 下用来快速启动 emacs client 的脚本</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月15日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#emacs" class='tag'>emacs</a>
+
+
+            
+          </div>
+          <p>我一直在 windows 下使用 emacs 的 client 模式。但是有一件事情让我非常的不爽，就是有时候 emacs server 在关闭之后不会自动清除掉 server 文件，导致下次打开的时候也不会用新的 server 文件覆盖原来的，令 client 程序无法正常开启。于是我写了下面这个脚本，可以在开 启 emacs 之前强制删除 server 文件：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> serverPath=home\.emacs.d\server\server</span><br><span class="line"><span class="built_in">set</span> executePath=bin\runemacs.exe</span><br><span class="line"></span><br><span class="line"><span class="built_in">del</span> <span class="variable">%~dp0%</span>serverPath%</span><br><span class="line"><span class="built_in">start</span> /b <span class="variable">%~dp0%</span>executePath% %<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>请确保路径正确，我将脚本放在了 emacs 根目录，就是有 bin 之类文件夹的地方。而 home 目 录也在这个路径的 home 文件夹下。脚本命名为 <code>remove-server-file-and-run.cmd</code> 。 <code>start</code> 命令可以让 emacs 启动的时候不会保留命令行的黑框。</p>
+<p>还有另一个脚本可以让 client 无法启动的时候运行上面的脚本来创建一个 server：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> serverPath=home\.emacs.d\server\server</span><br><span class="line"><span class="built_in">set</span> executePath=bin\emacsclientw.exe</span><br><span class="line"><span class="built_in">set</span> alternativeEditor=remove-server-file-and-run.<span class="built_in">cmd</span></span><br><span class="line"><span class="built_in">start</span> /b <span class="variable">%~dp0%</span>executePath% --server-file <span class="variable">%~dp0%</span>serverPath% %<span class="number">1</span> -a <span class="variable">%~dp0%</span>alternativeEditor%</span><br></pre></td></tr></table></figure>
+<p>这个脚本放在与刚才的脚本相同的目录中，命名为 <code>run-client-or-start-server.cmd</code> 。 同刚才一样，请确保路径正确。</p>
+<p>这样，我们就可以使用 <code>run-client-or-start-server.cmd 文件名</code> 来打开对应的文件了。 如果服务器不存在或 server 文件失效，脚本会自动删除 server 文件并开启一个新的 emacs 来 打开当前文件。如果你在 emacs 的配置中进行了一些设置的话，emacs 的启动会开启一个新的 server。</p>
+<p>比如在 total commander 中可以将上面的脚本绑定到一个快捷键上，然后一键用 emacs 打开文件。。。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

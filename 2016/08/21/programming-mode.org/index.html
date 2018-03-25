@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>写了一个 emacs package：number-lock.el | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>写了一个 emacs package：number-lock.el</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月21日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#emacs" class='tag'>emacs</a>
+
+  <a href="/tags/#emacs package" class='tag'>emacs package</a>
+
+
+            
+          </div>
+          <ul>
+<li><a href="#sec-">项目简介</a></li>
+<li><a href="#sec-">另一种实现方式</a></li>
+<li><a href="#sec-">16/8/30 更新</a></li>
+</ul>
+<h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介<a id="sec-"></a></h1><p>项目地址：<a href="https://github.com/Liu233w/number-lock.el" target="_blank" rel="noopener">https://github.com/Liu233w/number-lock.el</a></p>
+<p>这个 package 的主要功能与我的另一个脚本：<a href="https://github.com/Liu233w/CapsLocKeys.ahk" target="_blank" rel="noopener">CapsLocKeys.ahk</a> 中的一个功能类似， 可以把键盘上方的数字键替换成对应的符号，也就是说按下数字的时候会输入数字 上方的符号，而 <code>shift+数字</code> 则是数字本身。这个在写程序的时候非常有用。</p>
+<p>但是那个脚本不能判断应用程序目前的状态，我只想在 evil 的 insert state 里面启用 替换的功能，而在其他模式底下关闭，而且在带有数字键的快捷键（比如 <code>C-x 0</code> ）里面 我也不想启用替换，所以只好写一个 emacs 的插件来替换按键了。</p>
+<p>这个 package 定义了一个输入法：number-lock，只要用 <code>set-input-method</code> 把 输入法设置成这个，然后就可以用 <code>C-\</code> 来启用替换了。每个 buffer 的状态都是独立的， 并且只有在 buffer 的 insert-state 中才会开启，其他时候无论是在组合键还是在 minibuffer 中都不会启动。而且，如果有一些 package 在单个按键上绑定了函数，比如说 <code>paredit</code> 就在 <code>)</code> 上绑定了 <code>paredit-close-round</code> ，在按下右括号的时候可以把光标跳到最近 的右括号的外面，在使用了本 package 之后按下 <code>0</code> 之后可以调用这个函数，而不是仅仅 insert 一个 <code>)</code> 。</p>
+<h1 id="另一种实现方式"><a href="#另一种实现方式" class="headerlink" title="另一种实现方式"></a>另一种实现方式<a id="sec-"></a></h1><p>我是不用 emacs 里面的输入法的，所以这种实现方式对我没有什么影响，但使用内置 输入法的同学可能会不方便一些。其实一开始我不是使用这种方法，而是使用 <a href="https://www.emacswiki.org/emacs/Evil" target="_blank" rel="noopener">Emacs-Wiki</a>上的方法 ，用 <code>key-translation-map</code> 来替换按键的，但是会产生一些 奇怪的 bug，<a href="https://github.com/Liu233w/programming-mode.el/blob/key-translate-mode/programming-mode.el" target="_blank" rel="noopener">我把</a>原来的代码保存在了另一个分支里面 ，如果有大神能帮我看看就 好了_(:зゝ∠)_</p>
+<h1 id="16-8-30-更新"><a href="#16-8-30-更新" class="headerlink" title="16/8/30 更新"></a>16/8/30 更新<a id="sec-"></a></h1><p>我的 package 已经正式登陆 melpa 了，只需要 <code>M-x package-install RET number-lock RET</code> 即可安装。</p>
+<p>另外，melpa 上刚刚登陆了另一个和我的类似的插件： <a href="https://github.com/wbolster/evil-swap-keys" target="_blank" rel="noopener">evil-swap-keys</a> ，这个插件是用 <code>key-translation-map</code> 做到的，没有我之前实现中的 bug，并且很易于定制。 如果你还在 emacs 中使用别的输入法的话，这个 package 或许是一个不错的选择。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#项目简介"><span class="toc-number">1.</span> <span class="toc-text">项目简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#另一种实现方式"><span class="toc-number">2.</span> <span class="toc-text">另一种实现方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-8-30-更新"><span class="toc-number">3.</span> <span class="toc-text">16/8/30 更新</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>CodeForces 330B Road Construction | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>CodeForces 330B Road Construction</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年07月12日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/acm/">acm</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#acm" class='tag'>acm</a>
+
+
+            
+          </div>
+          <ul>
+<li><a href="#sec-">题目：</a></li>
+<li><a href="#sec-">代码：</a></li>
+<li><a href="#sec-">解析&amp;吐槽：</a></li>
+</ul>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：<a id="sec-"></a></h1><p class="verse"><br>B. Road Construction<br><br>time limit per test<br><br>2 seconds<br><br>memory limit per test<br><br>256 megabytes<br><br>input<br><br>standard input<br><br>output<br><br>standard output<br><br><br><br>A country has n cities. Initially, there is no road in the country. One day, the king decides to construct some roads connecting pairs of cities. Roads can be traversed either way. He wants those roads to be constructed in such a way that it is possible to go from each city to any other city by traversing at most two roads. You are also given m pairs of cities — roads cannot be constructed between these pairs of cities.<br><br><br><br>Your task is to construct the minimum number of roads that still satisfy the above conditions. The constraints will guarantee that this is always possible.<br><br>Input<br><br><br><br>The first line consists of two integers n and m .<br><br><br><br>Then m lines follow, each consisting of two integers ai and bi (1 ≤ ai, bi ≤ n, ai ≠ bi), which means that it is not possible to construct a road connecting cities ai and bi. Consider the cities are numbered from 1 to n.<br><br><br><br>It is guaranteed that every pair of cities will appear at most once in the input.<br><br>Output<br><br><br><br>You should print an integer s: the minimum number of roads that should be constructed, in the first line. Then s lines should follow, each consisting of two integers ai and bi (1 ≤ ai, bi ≤ n, ai ≠ bi), which means that a road should be constructed between cities ai and bi.<br><br><br><br>If there are several solutions, you may print any of them.<br><br>Examples<br><br>Input<br><br><br><br>4 1<br><br>1 3<br><br><br><br>Output<br><br><br><br>3<br><br>1 2<br><br>4 2<br><br>2 3<br><br></p>
+
+<p>note</p>
+<p>this is one possible solution of the example: <img src="e0655a1cf7b39a8d2447728cde1059fb3cccbaeb.png" alt="img"></p>
+<p>These are examples of wrong solutions: <img src="9feb7083b4d6c60ba32c71a1738c63b8bfac1b15.png" alt="img"> The above solution is wrong because it doesn’t use the minimum number of edges (4 vs 3). In addition, it also tries to construct a road between cities 1 and 3, while the input specifies that it is not allowed to construct a road between the pair. <img src="92ceeb24653609dd6c23343e6bbd2b97e0c3a551.png" alt="img"> The above solution is wrong because you need to traverse at least 3 roads to go from city 1 to city 3, whereas in your country it must be possible to go from any city to another by traversing at most 2 roads. <img src="80b1d5102b747752e1a19964bb3495be37e9a41b.png" alt="img"> Finally, the above solution is wrong because it must be possible to go from any city to another, whereas it is not possible in this country to go from city 1 to 3, 2 to 3, and 4 to 3.</p>
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：<a id="sec-"></a></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> cons[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n,k;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;++i)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    cons[a]=cons[b]=<span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>(cons[i])</span><br><span class="line">    ++i;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; n<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(j!=i)</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; j &lt;&lt;<span class="string">' '</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解析-amp-吐槽："><a href="#解析-amp-吐槽：" class="headerlink" title="解析&amp;吐槽："></a>解析&amp;吐槽：<a id="sec-"></a></h1><p>这道题的套路非常深。题目要求用尽量少的桥将几个城市连接起来，从一个城市到另一个城市最多需要 经过两个桥，同时给出一些两两成对的城市，这两个城市之间不能架桥，题目保证有解。输出桥的数量 和成对的城市——表示这两个城市之间要架一座桥。最优解有很多，输入其中任意一个即可。</p>
+<p>分析题目之后我们发现，如果想要在两座桥之内到达任意城市并且桥的数量尽量少，那么每个城市都必 须连接到同一个公共的城市，最终的桥梁成放射状。我们可以用反证法证明以上结论：</p>
+<p>如果有一个城市 没有连接到公共城市，它必须要连接到公共城市放射出来的一个城市中（保证桥梁数量最少时不能有环 形），此时它到达公共城市需要经过两座桥，则到达其他与公共城市相连的城市至少需要三座桥，不合 题意。</p>
+<p>那么如果题目保证有解，一定会有一个城市可以与任意的城市相连，我们只需要找到这个城市，让它和其它所有 城市配对即可。桥的数量就是城市的数量-1。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目："><span class="toc-number">1.</span> <span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码："><span class="toc-number">2.</span> <span class="toc-text">代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解析-amp-吐槽："><span class="toc-number">3.</span> <span class="toc-text">解析&amp;吐槽：</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

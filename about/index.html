@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>关于我 | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link active">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>关于我</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年03月25日</time>
+            
+            
+          </div>
+          <p>爱生活，爱折腾 (´・ω・`)</p>
+<p>本人大学本科狗一只，喜欢计算机相关的技术、软件开发，前工具控、键盘控。<br>目前正在学校ACM开发组做一些开发方面的工作。</p>
+<h1 id="博客组成"><a href="#博客组成" class="headerlink" title="博客组成"></a>博客组成</h1><ul>
+<li>ACM 题解：50% （这类内容估计以后不会更新了）</li>
+<li>Emacs 相关：40%</li>
+<li>其他：10%</li>
+</ul>
+<h1 id="我感兴趣的东西（计算机方面）"><a href="#我感兴趣的东西（计算机方面）" class="headerlink" title="我感兴趣的东西（计算机方面）"></a>我感兴趣的东西（计算机方面）</h1><ul>
+<li>前后端</li>
+<li>架构</li>
+<li>PL</li>
+<li>函数式编程</li>
+<li>元编程</li>
+<li>Emacs 相关（现在已经不感兴趣了）</li>
+</ul>
+<h1 id="目前使用的语言"><a href="#目前使用的语言" class="headerlink" title="目前使用的语言"></a>目前使用的语言</h1><ul>
+<li>JavaScript</li>
+<li>C#</li>
+<li>Java</li>
+<li>Python</li>
+<li>C++</li>
+<li>各种 LISP</li>
+</ul>
+<h1 id="和我相关"><a href="#和我相关" class="headerlink" title="和我相关"></a>和我相关</h1><ul>
+<li>GitHub 个人主页：<a href="https://github.com/liu233w/" target="_blank" rel="noopener">https://github.com/liu233w/</a></li>
+<li>邮箱：<a href="mailto:wwwlsmcom@outlook.com" target="_blank" rel="noopener">wwwlsmcom@outlook.com</a></li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#博客组成"><span class="toc-number">1.</span> <span class="toc-text">博客组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我感兴趣的东西（计算机方面）"><span class="toc-number">2.</span> <span class="toc-text">我感兴趣的东西（计算机方面）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#目前使用的语言"><span class="toc-number">3.</span> <span class="toc-text">目前使用的语言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#和我相关"><span class="toc-number">4.</span> <span class="toc-text">和我相关</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

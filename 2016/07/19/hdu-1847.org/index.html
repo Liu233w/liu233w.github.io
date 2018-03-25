@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>hdu-1847 Good Luck in CET-4 Everybody! | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>hdu-1847 Good Luck in CET-4 Everybody!</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年07月19日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/acm/">acm</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#acm" class='tag'>acm</a>
+
+
+            
+          </div>
+          <ul>
+<li><a href="#sec-">题目：</a></li>
+<li><a href="#sec-">代码：</a></li>
+<li><a href="#sec-">解析&amp;吐槽：</a></li>
+</ul>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：<a id="sec-"></a></h1><p class="verse"><br>Good Luck in CET-4 Everybody!<br><br>Time Limit: 1000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)<br><br>Total Submission(s): 8088    Accepted Submission(s): 5209<br><br><br><br><br><br>Problem Description<br><br>大学英语四级考试就要来临了，你是不是在紧张的复习？也许紧张得连短学期的 ACM 都没工夫练习了，反正我知道的 Kiki 和 Cici 都是如此。当然，作为在考场浸润了十几载的当代大学生，Kiki 和 Cici 更懂得考前的放松，所谓“张弛有道”就是这个意思。这不，Kiki 和 Cici 在每天晚上休息之前都要玩一会儿扑克牌以放松神经。<br><br>“升级”？“双扣”？“红五”？还是“斗地主”？<br><br>当然都不是！那多俗啊~<br><br>作为计算机学院的学生，Kiki 和 Cici 打牌的时候可没忘记专业，她们打牌的规则是这样的：<br><br>1、  总共 n 张牌;<br><br>2、  双方轮流抓牌；<br><br>3、  每人每次抓牌的个数只能是 2 的幂次（即：1，2，4，8，16…）<br><br>4、  抓完牌，胜负结果也出来了：最后抓完牌的人为胜者；<br><br>假设 Kiki 和 Cici 都是足够聪明（其实不用假设，哪有不聪明的学生~），并且每次都是 Kiki 先抓牌，请问谁能赢呢？<br><br>当然，打牌无论谁赢都问题不大，重要的是马上到来的 CET-4 能有好的状态。<br><br><br><br>Good luck in CET-4 everybody!<br><br><br><br><br><br>Input<br><br>输入数据包含多个测试用例，每个测试用例占一行，包含一个整数 n（1&lt;=n&lt;=1000）。<br><br><br><br><br><br>Output<br><br>如果 Kiki 能赢的话，请输出“Kiki”，否则请输出“Cici”，每个实例的输出占一行。<br><br><br><br><br><br>Sample Input<br><br><br><br>1<br><br>3<br><br><br><br><br><br><br><br>Sample Output<br><br><br><br>Kiki<br><br>Cici<br><br></p>
+
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：<a id="sec-"></a></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oj.cpp : 定义控制台应用程序的入口点。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="comment">//#include &lt;cstdio&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> good[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pow2</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;pow2(i) &lt; <span class="number">1010</span>;++i)</span><br><span class="line">        good[pow2(i)] = <span class="number">1</span>;</span><br><span class="line">    good[<span class="number">3</span>] = <span class="number">2</span>;</span><br><span class="line">    good[<span class="number">5</span>] = <span class="number">1</span>;</span><br><span class="line">    good[<span class="number">6</span>] = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getres</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (good[n])</span><br><span class="line">        <span class="keyword">return</span> good[n];</span><br><span class="line"></span><br><span class="line">    good[n] = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;n - pow2(i) &gt; <span class="number">0</span>;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (getres(n - pow2(i)) == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            good[n] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> good[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (getres(n) == <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Kiki"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Cici"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解析-amp-吐槽："><a href="#解析-amp-吐槽：" class="headerlink" title="解析&amp;吐槽："></a>解析&amp;吐槽：<a id="sec-"></a></h1><p>一道博弈论的题，大家都说这是巴什博奕。</p>
+<p>分析题目可知，设对于 Kiki 胜利的局势是必胜局。</p>
+<ul>
+<li>对于 n 等于 2 的幂次方的情况一定是必胜局。</li>
+<li>如果 n 减去某个 2 的幂次方可以得到必胜局的话，那么 n 也一定是必胜局。</li>
+<li>如果不管怎么减都无法得到必胜局，则 n 是必败局。</li>
+</ul>
+<p>可见，上述的情况是一个完美的递归，可以用记忆化搜索的方式来提高效率。</p>
+<p>我看过网上的题解说列出前几个必败局的情况，“通过观察可知”只要 n 是 3 的倍数，就一定是必败局。 也就是说下面的代码一样可以 AC：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> T;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; T) &#123;</span><br><span class="line">  <span class="keyword">if</span> (T % <span class="number">3</span> == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Cici\n"</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Kiki\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过这到底是为什么呢，感觉这种找规律的事情也太不讲理了吧。</p>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目："><span class="toc-number">1.</span> <span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码："><span class="toc-number">2.</span> <span class="toc-text">代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解析-amp-吐槽："><span class="toc-number">3.</span> <span class="toc-text">解析&amp;吐槽：</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

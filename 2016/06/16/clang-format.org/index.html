@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>在 emacs 中使用 clang-format 自动格式化 c++代码 | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>在 emacs 中使用 clang-format 自动格式化 c++代码</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年06月16日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#emacs" class='tag'>emacs</a>
+
+  <a href="/tags/#clang-format" class='tag'>clang-format</a>
+
+  <a href="/tags/#LLVM" class='tag'>LLVM</a>
+
+  <a href="/tags/#c++" class='tag'>c++</a>
+
+
+            
+          </div>
+          <ul>
+<li><a href="#sec-">序言</a></li>
+<li><a href="#sec-">需要的工具</a></li>
+<li><a href="#sec-">安装步骤</a></li>
+<li><a href="#sec-">需要改进的方面</a></li>
+<li><a href="#sec-">16/11/3 更新</a><ul>
+<li><a href="#sec-">正文</a></li>
+<li><a href="#sec-">编码问题</a></li>
+<li><a href="#sec-">TIPS</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言<a id="sec-"></a></h1><p>Visual Studio 中的 c++ 编辑器有一个很强大的功能，就是在键入分号或者右大括号之后可以自动格式化当前区域的代码。这个功能也可以在 Emacs 中实现。</p>
+<h1 id="需要的工具"><a href="#需要的工具" class="headerlink" title="需要的工具"></a>需要的工具<a id="sec-"></a></h1><ul>
+<li>emacs（废话）</li>
+<li>clang-format（windows 版的 clang 中自带了，linux 版需要自己安装）</li>
+<li>evil（我的函数使用了 evil 中的一些函数） – EDIT：我最新的代码取消了这个限制</li>
+<li>spacemacs（可选，只是配置起来方便一些）</li>
+</ul>
+<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤<a id="sec-"></a></h1><p>这里使用 spacemacs 做示范，在.spacemacs.el 或者.spacemacs.d/init.el 的 layer 函数中找到 c++ layer，把它替换成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(c-c++ :variables</span><br><span class="line">       c-c++-enable-clang-support t</span><br><span class="line">       )</span><br></pre></td></tr></table></figure>
+<p>如果没有找到 c++的话直接加上这一行就可以了。对于不使用 spacemacs 的用户，可以参考<a href="http://clang.llvm.org/docs/ClangFormat.html" target="_blank" rel="noopener">官方网站</a>。</p>
+<p>然后我们需要这两个函数来做格式化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(defun liu233w/semi-clang-format (args)</span><br><span class="line">  &quot;format by clang-format when enter &apos;;&apos;&quot;</span><br><span class="line">  (interactive &quot;*P&quot;)</span><br><span class="line">  (c-electric-semi&amp;comma args)</span><br><span class="line">  (clang-format-region (line-beginning-position 0) (line-beginning-position 2))</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">(defun liu233w/brace-clang-format (args)</span><br><span class="line">  &quot;format by clang-format when enter &apos;&#125;&apos;&quot;</span><br><span class="line">  (interactive &quot;*P&quot;)</span><br><span class="line">  (c-electric-brace args)</span><br><span class="line">  (let ((end-position (point))</span><br><span class="line">        begin-position)</span><br><span class="line">    (save-excursion</span><br><span class="line">      (evil-jump-item)</span><br><span class="line">      (setf begin-position (point)))</span><br><span class="line">    (clang-format-region begin-position end-position))</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>linux 用户注意：Ubuntu 版 clang-format 的可执行文件名不是 clang-format，而是 clang-format-&lt;版本号&gt;，在使用这两个函数之前需要做一个 链接：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/bin</span><br><span class="line">sudo ln clang-format-&lt;版本号&gt; clang-format</span><br></pre></td></tr></table></figure>
+<p>然后加上快捷键：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">;;add clang-format support</span><br><span class="line">(add-hook &apos;c++-mode-hook</span><br><span class="line">          (lambda ()</span><br><span class="line">            (when (executable-find &quot;clang-format&quot;)</span><br><span class="line">              ;;使用 clang-format 作为默认排版工具</span><br><span class="line">              (local-set-key (kbd &quot;C-M-\\&quot;) &apos;clang-format)</span><br><span class="line">              ;;当插入分号时自动对当前行排版</span><br><span class="line">              (local-set-key (kbd &quot;;&quot;)</span><br><span class="line">                             &apos;liu233w/semi-clang-format)</span><br><span class="line">              (local-set-key (kbd &quot;&#125;&quot;)</span><br><span class="line">                             &apos;liu233w/brace-clang-format))))</span><br></pre></td></tr></table></figure>
+<p>我的代码只能在 c++-mode 下使用，现在只要输入分号（如果使用 evil 的话要在插入模式下输入）就可以自动对包括当前行和前后两行在内的代码格式化。 如果输入右大括号就会跳到最近的右大括号之后，并且对整个代码块进行格式化。和 Visual Studio 不同的是不能通过删除右大括号再重新插入的方式来格式化 代码块——这样代码就乱了（这是 c-electric-brace 函数的原因）。不过有了右大括号跳到代码块之外的功能和括号自动补全之后也就不需要单独输入右大括号了吧。</p>
+<p>clang-format 还有一个格式化配置文件的功能。可以把一个命名为.clang-format 的文本文件放在源代码的同级或上级目录中来控制 clang-format 的格式化行为。 具体配置方法请参考<a href="http://clang.llvm.org/docs/ClangFormatStyleOptions.html" target="_blank" rel="noopener">http://clang.llvm.org/docs/ClangFormatStyleOptions.html</a>。 这里贴上我的配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BasedOnStyle: google</span><br><span class="line">IndentWidth: 4</span><br><span class="line">BreakBeforeBraces: Allman</span><br><span class="line">AllowShortFunctionsOnASingleLine: false</span><br></pre></td></tr></table></figure>
+<h1 id="需要改进的方面"><a href="#需要改进的方面" class="headerlink" title="需要改进的方面"></a>需要改进的方面<a id="sec-"></a></h1><p>clang-format 的格式化行为缺少默认值，如果能在找不到配置文件的时候使用一个默认的就好了。等我把 elisp 学好之后再加上这个功能吧。</p>
+<h1 id="16-11-3-更新"><a href="#16-11-3-更新" class="headerlink" title="16/11/3 更新"></a>16/11/3 更新<a id="sec-"></a></h1><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文<a id="sec-"></a></h2><p>今天完成了新版的代码，改动如下：</p>
+<ul>
+<li>独立成了一个单独的 package，虽然目前还是只能用在 c 和 c++ 上，但是我懒得改了_(:зゝ∠)_</li>
+<li>在没有提供配置文件的时候自动提供一个默认的配置选项，此选项可以定制</li>
+<li>去除了对 evil 的依赖。</li>
+</ul>
+<p>新的代码在：<a href="https://github.com/Liu233w/.spacemacs.d/blob/master/layers/liu233w/local/auto-clang-format/auto-clang-format.el" target="_blank" rel="noopener">https://github.com/Liu233w/.spacemacs.d/blob/master/layers/liu233w/local/auto-clang-format/auto-clang-format.el</a></p>
+<p>使用方法： <code>(add-hook &#39;c++-mode-hook #&#39;acf-enable-auto-clang-format)</code> spacemacs 用户可以参考<a href="https://github.com/Liu233w/.spacemacs.d/commit/5040d6f32c7b91811f40256e39d1830aae2a3bfc" target="_blank" rel="noopener">我的配置。</a></p>
+<h2 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题<a id="sec-"></a></h2><p>最近更新了新版的 emacs25 和 spacemacs 0.200.1，发现 clang-format 没法正常格式化代码了 （windows 系统）。因为 clang-format 程序会使用 windows 下的 CR LF 行尾，而 emacs 保存 的临时文件是 Unix 的 LF 行尾。使用下面的代码可以修复（在 clang-format 之后求值）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(when (spacemacs/system-is-mswindows)</span><br><span class="line">  (defun liu233w//utf-8-dos-as-coding-system-for-write (func &amp;rest rest)</span><br><span class="line">    (let ((coding-system-for-write &apos;utf-8-dos))</span><br><span class="line">      (apply func rest)))</span><br><span class="line">  (advice-add #&apos;clang-format-region :around</span><br><span class="line">              #&apos;liu233w//utf-8-dos-as-coding-system-for-write))</span><br></pre></td></tr></table></figure>
+<h2 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS<a id="sec-"></a></h2><ul>
+<li>locate-dominating-file 函数可以在指定的文件（第一个参数）的当前目录和上级目录中寻找指定的 文件（夹）名（第二个参数）。找到时返回其绝对地址，找不到返回 nil。</li>
+</ul>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#序言"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#需要的工具"><span class="toc-number">2.</span> <span class="toc-text">需要的工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装步骤"><span class="toc-number">3.</span> <span class="toc-text">安装步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#需要改进的方面"><span class="toc-number">4.</span> <span class="toc-text">需要改进的方面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-11-3-更新"><span class="toc-number">5.</span> <span class="toc-text">16/11/3 更新</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">5.1.</span> <span class="toc-text">正文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码问题"><span class="toc-number">5.2.</span> <span class="toc-text">编码问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TIPS"><span class="toc-number">5.3.</span> <span class="toc-text">TIPS</span></a></li></ol></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>

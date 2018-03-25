@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="">
+  
+    
+  <title>SICP 1.16 题 题解 | 科学君的不科学博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>SICP 1.16 题 题解</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年02月24日</time>
+            
+              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#sicp" class='tag'>sicp</a>
+
+
+            
+          </div>
+          <ul>
+<li><a href="#sec-">题目描述</a></li>
+<li><a href="#sec-">分析</a></li>
+<li><a href="#sec-">源代码</a></li>
+</ul>
+<p>刚刚做出来 sicp 里的 1.16 题，深有感触。看了一下<a href="http://sicp.readthedocs.io/en/latest/chp1/16.html" target="_blank" rel="noopener">网上的题解</a> ，并没有题目的分析过 程，因此把我的分析过程在这里记录了一下。</p>
+<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述<a id="sec-"></a></h1><p>根据书中给出的关系 <img src="sicp-1-16/1.png" alt="img"> ，并且使用一个不变量记录中间结果，写出对数步数内迭代计算幂的函数。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析<a id="sec-"></a></h1><p>题目中说到令 <img src="sicp-1-16/2.png" alt="img"> ，而 a 的初始值为 1，在最后 a 为运算的 结果（b 的 n 次方）。可得公式：<img src="sicp-1-16/3.png" alt="img"> 。因此推知迭代终点为 <code>n = 0</code> 。</p>
+<p>令初始公式为 <img src="sicp-1-16/4.png" alt="img"> 。</p>
+<ul>
+<li>当 <code>n = 0</code> 时，迭代结束</li>
+<li>当 n 为偶数时，可得 <img src="sicp-1-16/5.png" alt="img"> ，在结果中可以把 b<sup>2</sup> 看作新 的 b，把 n/2 看作新的 n，然后继续迭代</li>
+<li>当 n 为奇数时，n-1 为偶数或者 0，有 <img src="sicp-1-16/6.png" alt="img"> ，可以把 a*b 看作新的 a，把 b<sup>n-1</sup> 看作新的 b。</li>
+</ul>
+<p>由此，所有的情况已经分析完毕。</p>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码<a id="sec-"></a></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#lang racket</span><br><span class="line">(define (expt-iter b n a)</span><br><span class="line">  [cond ([= n 0] a)</span><br><span class="line">        ([even? n]</span><br><span class="line">         (expt-iter (* b b) (/ n 2) a))</span><br><span class="line">        (else</span><br><span class="line">         (expt-iter b (- n 1) (* a b)))])</span><br><span class="line"></span><br><span class="line">(define (expt b n)</span><br><span class="line">  (expt-iter b n 1))</span><br></pre></td></tr></table></figure>
+
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-number">1.</span> <span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分析"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源代码"><span class="toc-number">3.</span> <span class="toc-text">源代码</span></a></li></ol>
+        </div>
+    </div>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+</body>
+</html>
