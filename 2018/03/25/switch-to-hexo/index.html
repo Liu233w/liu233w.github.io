@@ -90,10 +90,25 @@
 <h1 id="从org获取元信息"><a href="#从org获取元信息" class="headerlink" title="从org获取元信息"></a>从org获取元信息</h1><p>光有文章显然是不行的，我们还是得获取一下文章标题、日期、tag之类的东西。我写了一个<br>python脚本来干这件事。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 装着md和org的目录</span></span><br><span class="line">dirPath = <span class="string">"d:/Temp/blog-p/"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> strftime</span><br><span class="line">now = strftime(<span class="string">"%Y/%m/%d %H:%M:%S"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成的 category</span></span><br><span class="line">category = <span class="string">'blog'</span></span><br><span class="line"></span><br><span class="line">fileList = os.listdir(dirPath)</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> fileList:</span><br><span class="line">    <span class="keyword">if</span> item.endswith(<span class="string">'.md'</span>):</span><br><span class="line">        <span class="keyword">with</span> open(dirPath + item, <span class="string">'r+'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> out, open(dirPath + item[:<span class="number">-3</span>], encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> inP:</span><br><span class="line">            content = out.read()</span><br><span class="line">            orgAll = inP.readlines()</span><br><span class="line">            <span class="keyword">global</span> title, tags, date, keywords</span><br><span class="line">            keywords = []</span><br><span class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> orgAll:</span><br><span class="line">                <span class="keyword">if</span> line.startswith(<span class="string">'#+TITLE:'</span>):</span><br><span class="line">                    title = line</span><br><span class="line">                <span class="keyword">elif</span> line.startswith(<span class="string">'#+DATE:'</span>):</span><br><span class="line">                    date = line</span><br><span class="line">                <span class="keyword">elif</span> line.startswith(<span class="string">'#+TAGS:'</span>):</span><br><span class="line">                    tags = line</span><br><span class="line">                <span class="keyword">elif</span> line.startswith(<span class="string">'#+KEYWORDS:'</span>):</span><br><span class="line">                    keywords = line[<span class="number">11</span>:<span class="number">-1</span>].strip().split(<span class="string">', '</span>)</span><br><span class="line">            title = title[<span class="number">8</span>:<span class="number">-1</span>].strip()</span><br><span class="line">            date = date[<span class="number">7</span>:<span class="number">-1</span>].strip().split(<span class="string">' '</span>)[<span class="number">0</span>]</span><br><span class="line">            tags = tags[<span class="number">7</span>:<span class="number">-1</span>].strip().split(<span class="string">', '</span>)</span><br><span class="line">            tags = list(set(tags + keywords))</span><br><span class="line">            header = <span class="string">'---\n'</span></span><br><span class="line">            header += <span class="string">'date: '</span> + date.replace(<span class="string">'-'</span>,<span class="string">'/'</span>) + <span class="string">' 00:00:00\n'</span></span><br><span class="line">            header += <span class="string">'updated: '</span> + now + <span class="string">'\n'</span></span><br><span class="line">            header += <span class="string">'tags:\n'</span></span><br><span class="line">            <span class="keyword">for</span> tag <span class="keyword">in</span> tags:</span><br><span class="line">                header += <span class="string">'- '</span> + tag + <span class="string">'\n'</span></span><br><span class="line">            header += <span class="string">'categories:\n- '</span> + category + <span class="string">'\n'</span></span><br><span class="line">            header += <span class="string">'title: '</span> + title + <span class="string">'\n'</span></span><br><span class="line">            header += <span class="string">'---\n'</span></span><br><span class="line"></span><br><span class="line">            out.seek(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">            out.write(header + <span class="string">'\n'</span> + content)</span><br></pre></td></tr></table></figure>
 <p>你可以视情况改一下里面的几个变量。由于我以前还用过 org-page，这些文件里面有的文件<br>只有 <code>Keywords</code> 没有 <code>Tags</code>，正好趁这个机会合并一下。</p>
+<h1 id="修改其他内容"><a href="#修改其他内容" class="headerlink" title="修改其他内容"></a>修改其他内容</h1><p>比如说org里的图片什么的，由于我也没有几张，就 ag 出来手动改了。</p>
 
         </section>
     </article>
     
+        <!-- disqus 评论框 start -->
+        <div class="comment">
+            <div id="disqus_thread" class="disqus-thread">
+              <i>加载评论框需要翻墙</i>
+            </div>
+        </div>
+        <!-- disqus 评论框 end -->
+    
+    
+        <!-- livere 评论框 start -->
+        <div class="comment">
+            <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+        </div>
+        <!-- livere 评论框 end -->
         
   </div>
   <aside>
@@ -101,13 +116,67 @@
     <div class="toc-container">
         <h1>目录</h1>
         <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#批量从-org-转换到-markdown"><span class="toc-number">2.</span> <span class="toc-text">批量从 org 转换到 markdown</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从org获取元信息"><span class="toc-number">3.</span> <span class="toc-text">从org获取元信息</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#批量从-org-转换到-markdown"><span class="toc-number">2.</span> <span class="toc-text">批量从 org 转换到 markdown</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从org获取元信息"><span class="toc-number">3.</span> <span class="toc-text">从org获取元信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改其他内容"><span class="toc-number">4.</span> <span class="toc-text">修改其他内容</span></a></li></ol>
         </div>
     </div>
     
   </aside>
 </main>
 
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "liu233w.github.io/2018/03/25/switch-to-hexo/";
+  var disqus_url = "liu233w.github.io/2018/03/25/switch-to-hexo/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+      called = true;
+      cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function() {
+      if (!called) {
+      xhr.abort();
+      cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+
+      if (typeof LivereTower === 'function') { return; }
+
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+
+      e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
 
 
   <footer>
