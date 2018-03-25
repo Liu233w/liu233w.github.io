@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="liu233w.github.io/"/>
-  <updated>2018-03-25T16:26:42.794Z</updated>
+  <updated>2018-03-25T16:32:34.550Z</updated>
   <id>liu233w.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>切换到 hexo</title>
+    <title>从 EGO 切换到 hexo</title>
     <link href="liu233w.github.io/2018/03/25/switch-to-hexo/"/>
     <id>liu233w.github.io/2018/03/25/switch-to-hexo/</id>
     <published>2018-03-25T14:56:48.000Z</published>
-    <updated>2018-03-25T16:26:42.794Z</updated>
+    <updated>2018-03-25T16:32:34.550Z</updated>
     
     <summary type="html">
     
@@ -66,11 +66,11 @@
       <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
     
     
-      <category term="前端" scheme="liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="vue" scheme="liu233w.github.io/tags/vue/"/>
     
       <category term="jest" scheme="liu233w.github.io/tags/jest/"/>
+    
+      <category term="前端" scheme="liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -404,9 +404,9 @@ bash.exe&amp;quot;:
       <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
     
     
-      <category term="EGO" scheme="liu233w.github.io/tags/EGO/"/>
-    
       <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+      <category term="EGO" scheme="liu233w.github.io/tags/EGO/"/>
     
   </entry>
   
@@ -444,6 +444,32 @@ bash.exe&amp;quot;:
   </entry>
   
   <entry>
+    <title>OJ 中使用 fread 加速读入</title>
+    <link href="liu233w.github.io/2016/08/20/fread.org/"/>
+    <id>liu233w.github.io/2016/08/20/fread.org/</id>
+    <published>2016-08-19T16:00:00.000Z</published>
+    <updated>2018-03-25T14:26:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;关于 fread 加速读入的说明请参考 &lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
+    
+    
+      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>POJ-1330 Nearest Common Ancestors</title>
     <link href="liu233w.github.io/2016/08/20/poj-1330.org/"/>
     <id>liu233w.github.io/2016/08/20/poj-1330.org/</id>
@@ -461,32 +487,6 @@ bash.exe&amp;quot;:
 &lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
-    
-    
-      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OJ 中使用 fread 加速读入</title>
-    <link href="liu233w.github.io/2016/08/20/fread.org/"/>
-    <id>liu233w.github.io/2016/08/20/fread.org/</id>
-    <published>2016-08-19T16:00:00.000Z</published>
-    <updated>2018-03-25T14:26:29.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;关于 fread 加速读入的说明请参考 &lt;a
         
       
     
