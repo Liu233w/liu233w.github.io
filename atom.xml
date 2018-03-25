@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>科学君的不科学博客</title>
+  
+  <subtitle>by 不科学的科学君</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="liu233w.github.io/"/>
+  <updated>2018-03-25T15:14:04.306Z</updated>
+  <id>liu233w.github.io/</id>
+  
+  <author>
+    <name>Liu233w</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>切换到 hexo</title>
+    <link href="liu233w.github.io/2018/03/25/switch-to-hexo/"/>
+    <id>liu233w.github.io/2018/03/25/switch-to-hexo/</id>
+    <published>2018-03-25T14:56:48.000Z</published>
+    <updated>2018-03-25T15:14:04.306Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我刚刚打算写一篇博文，结果发现我的 ego
+        
+      
+    
+    </summary>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+      <category term="前端" scheme="liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="python" scheme="liu233w.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nuxt+Jest 构建页面级的快照测试</title>
+    <link href="liu233w.github.io/2018/03/25/nuxt-jest-snapshot/"/>
+    <id>liu233w.github.io/2018/03/25/nuxt-jest-snapshot/</id>
+    <published>2018-03-24T16:00:00.000Z</published>
+    <updated>2018-03-25T15:17:15.656Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;我最近的一个网站用到了 Vue 的 nuxtjs 框架，这个框架的&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="前端" scheme="liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="vue" scheme="liu233w.github.io/tags/vue/"/>
+    
+      <category term="jest" scheme="liu233w.github.io/tags/jest/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpaceShift 在实际使用中的问题</title>
+    <link href="liu233w.github.io/2017/05/12/space-as-shift.org/"/>
+    <id>liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="键盘" scheme="liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因</title>
+    <link href="liu233w.github.io/2017/05/12/wsl-bash.org/"/>
+    <id>liu233w.github.io/2017/05/12/wsl-bash.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;今天我久违的打开了 WSL，结果发现它报了一个奇怪的错误：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;PS C:\WINDOWS\system32&amp;gt; bash
+bash.exe&amp;quot;-3.1$ apt-get --version
+bash.exe&amp;quot;:
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="windows" scheme="liu233w.github.io/tags/windows/"/>
+    
+      <category term="wsl" scheme="liu233w.github.io/tags/wsl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 windows 下使用计划任务来启动卡巴斯基杀毒软件的正确姿势</title>
+    <link href="liu233w.github.io/2017/04/13/run-kaspersky-by-schedule.org/"/>
+    <id>liu233w.github.io/2017/04/13/run-kaspersky-by-schedule.org/</id>
+    <published>2017-04-12T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近我又有了一个奇葩的需求，需要在计划任务里面启动卡巴斯基杀毒软件。然而很快我发 现，没办法通过把可执行文件路径直接放进计划任务的“启动程序”里面的方式来启动它。 如果这样的话，启动计划任务时只会在后台启动一个进程，软件的图标甚至不会出现在托盘 区里面。即使把启动命令改成
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="windows" scheme="liu233w.github.io/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SICP 1.16 题 题解</title>
+    <link href="liu233w.github.io/2017/02/24/sicp-1-16.org/"/>
+    <id>liu233w.github.io/2017/02/24/sicp-1-16.org/</id>
+    <published>2017-02-23T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;题目描述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;源代码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;刚刚做出来 sicp 里的 1.16
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="sicp" scheme="liu233w.github.io/tags/sicp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows 下用来快速启动 emacs client 的脚本</title>
+    <link href="liu233w.github.io/2016/11/15/windows-emacs-cmd.org/"/>
+    <id>liu233w.github.io/2016/11/15/windows-emacs-cmd.org/</id>
+    <published>2016-11-14T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;我一直在 windows 下使用 emacs 的 client 模式。但是有一件事情让我非常的不爽，就是有时候 emacs server 在关闭之后不会自动清除掉 server 文件，导致下次打开的时候也不会用新的 server 文件覆盖原来的，令 client
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决 Emacs 的 Python 交互执行环境在 windows 下无法显示中文的问题</title>
+    <link href="liu233w.github.io/2016/09/29/org-python-windows.org/"/>
+    <id>liu233w.github.io/2016/09/29/org-python-windows.org/</id>
+    <published>2016-09-28T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;问题描述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解决方案&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;org-babel 的问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+      <category term="org" scheme="liu233w.github.io/tags/org/"/>
+    
+      <category term="windows" scheme="liu233w.github.io/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>执行当前 buffer 中的源代码</title>
+    <link href="liu233w.github.io/2016/09/21/run-current-file.org/"/>
+    <id>liu233w.github.io/2016/09/21/run-current-file.org/</id>
+    <published>2016-09-20T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;正文&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;TIPS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 windows 下使用快捷键安全快速地移除 USB 设备</title>
+    <link href="liu233w.github.io/2016/09/19/remove-usb.org/"/>
+    <id>liu233w.github.io/2016/09/19/remove-usb.org/</id>
+    <published>2016-09-18T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;序言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;一个脚本&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;序言&quot;&gt;&lt;a href=&quot;#序言&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="windows" scheme="liu233w.github.io/tags/windows/"/>
+    
+      <category term="usb" scheme="liu233w.github.io/tags/usb/"/>
+    
+      <category term="ahk" scheme="liu233w.github.io/tags/ahk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 spacemacs 生成 micro-state 的同时为每个命令生成对应的执行并进入 micro-state 的函数</title>
+    <link href="liu233w.github.io/2016/09/02/multiple-micro-state.org/"/>
+    <id>liu233w.github.io/2016/09/02/multiple-micro-state.org/</id>
+    <published>2016-09-01T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;需求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;我的实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;使用&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+      <category term="spacemacs" scheme="liu233w.github.io/tags/spacemacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 windows 下使用 clang（不需要重新编译）</title>
+    <link href="liu233w.github.io/2016/08/30/clang-windows.org/"/>
+    <id>liu233w.github.io/2016/08/30/clang-windows.org/</id>
+    <published>2016-08-29T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;需求&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;如何让 clang 使用 visual studio 2015 的头文件和链接器而不重新编译 clang&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+      <category term="LLVM" scheme="liu233w.github.io/tags/LLVM/"/>
+    
+      <category term="clang" scheme="liu233w.github.io/tags/clang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 org 的文件名作为 EGO 生成的 URL</title>
+    <link href="liu233w.github.io/2016/08/22/change-url-generator.org/"/>
+    <id>liu233w.github.io/2016/08/22/change-url-generator.org/</id>
+    <published>2016-08-21T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;概述&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;改进方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;原理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;16/8/23
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="EGO" scheme="liu233w.github.io/tags/EGO/"/>
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>写了一个 emacs package：number-lock.el</title>
+    <link href="liu233w.github.io/2016/08/21/programming-mode.org/"/>
+    <id>liu233w.github.io/2016/08/21/programming-mode.org/</id>
+    <published>2016-08-20T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;项目简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;另一种实现方式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;16/8/30 更新&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;项目简介&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+      <category term="emacs package" scheme="liu233w.github.io/tags/emacs-package/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>POJ-1330 Nearest Common Ancestors</title>
+    <link href="liu233w.github.io/2016/08/20/poj-1330.org/"/>
+    <id>liu233w.github.io/2016/08/20/poj-1330.org/</id>
+    <published>2016-08-19T16:00:00.000Z</published>
+    <updated>2018-03-25T14:26:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;题目：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
+    
+    
+      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OJ 中使用 fread 加速读入</title>
+    <link href="liu233w.github.io/2016/08/20/fread.org/"/>
+    <id>liu233w.github.io/2016/08/20/fread.org/</id>
+    <published>2016-08-19T16:00:00.000Z</published>
+    <updated>2018-03-25T14:26:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;关于 fread 加速读入的说明请参考 &lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
+    
+    
+      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HDU-5090 Game with Pearls</title>
+    <link href="liu233w.github.io/2016/08/17/hdu-5090.org/"/>
+    <id>liu233w.github.io/2016/08/17/hdu-5090.org/</id>
+    <published>2016-08-16T16:00:00.000Z</published>
+    <updated>2018-03-25T14:26:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;题目：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;代码：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;题目：&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
+    
+    
+      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在 windows 平台将 emacs 绿色化</title>
+    <link href="liu233w.github.io/2016/07/26/emacs-portable.org/"/>
+    <id>liu233w.github.io/2016/07/26/emacs-portable.org/</id>
+    <published>2016-07-25T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;概要&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;原理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HDU-4825 Xor Sum（OJ 优化实验）</title>
+    <link href="liu233w.github.io/2016/07/25/hdu-4825.org/"/>
+    <id>liu233w.github.io/2016/07/25/hdu-4825.org/</id>
+    <published>2016-07-24T16:00:00.000Z</published>
+    <updated>2018-03-25T14:26:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;题目：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;提交语言：c++ vs g++&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
+    
+    
+      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UVA-10020 Minimal coverage</title>
+    <link href="liu233w.github.io/2016/07/25/uva-10020.org/"/>
+    <id>liu233w.github.io/2016/07/25/uva-10020.org/</id>
+    <published>2016-07-24T16:00:00.000Z</published>
+    <updated>2018-03-25T14:26:29.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;题目：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;代码：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;题目：&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
+    
+    
+      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
+    
+  </entry>
+  
+</feed>
