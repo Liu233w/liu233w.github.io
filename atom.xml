@@ -103,32 +103,6 @@
   </entry>
   
   <entry>
-    <title>SpaceShift 在实际使用中的问题</title>
-    <link href="liu233w.github.io/2017/05/12/space-as-shift.org/"/>
-    <id>liu233w.github.io/2017/05/12/space-as-shift.org/</id>
-    <published>2017-05-11T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="键盘" scheme="liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
-    
-  </entry>
-  
-  <entry>
     <title>WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因</title>
     <link href="liu233w.github.io/2017/05/12/wsl-bash.org/"/>
     <id>liu233w.github.io/2017/05/12/wsl-bash.org/</id>
@@ -156,6 +130,32 @@ bash.exe&amp;quot;:
       <category term="windows" scheme="liu233w.github.io/tags/windows/"/>
     
       <category term="wsl" scheme="liu233w.github.io/tags/wsl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpaceShift 在实际使用中的问题</title>
+    <link href="liu233w.github.io/2017/05/12/space-as-shift.org/"/>
+    <id>liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="键盘" scheme="liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
@@ -398,11 +398,11 @@ bash.exe&amp;quot;:
       <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
     
     
+      <category term="clang" scheme="liu233w.github.io/tags/clang/"/>
+    
       <category term="emacs" scheme="liu233w.github.io/tags/emacs/"/>
     
       <category term="LLVM" scheme="liu233w.github.io/tags/LLVM/"/>
-    
-      <category term="clang" scheme="liu233w.github.io/tags/clang/"/>
     
   </entry>
   
