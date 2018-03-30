@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="liu233w.github.io/"/>
-  <updated>2018-03-25T16:42:14.632Z</updated>
+  <updated>2018-03-29T16:43:46.615Z</updated>
   <id>liu233w.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 ABP 2.3 和 Vue 单页应用中的踩坑总结</title>
+    <link href="liu233w.github.io/2018/03/27/abp11/"/>
+    <id>liu233w.github.io/2018/03/27/abp11/</id>
+    <published>2018-03-27T08:43:36.000Z</published>
+    <updated>2018-03-29T16:43:46.615Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;离 &lt;a href=&quot;http://acm.nwpu.edu.cn&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Web 开发" scheme="liu233w.github.io/tags/Web-%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Asp.Net" scheme="liu233w.github.io/tags/Asp-Net/"/>
+    
+      <category term="Vue" scheme="liu233w.github.io/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>从 EGO 切换到 hexo</title>
@@ -75,6 +103,32 @@
   </entry>
   
   <entry>
+    <title>SpaceShift 在实际使用中的问题</title>
+    <link href="liu233w.github.io/2017/05/12/space-as-shift.org/"/>
+    <id>liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="键盘" scheme="liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因</title>
     <link href="liu233w.github.io/2017/05/12/wsl-bash.org/"/>
     <id>liu233w.github.io/2017/05/12/wsl-bash.org/</id>
@@ -102,32 +156,6 @@ bash.exe&amp;quot;:
       <category term="windows" scheme="liu233w.github.io/tags/windows/"/>
     
       <category term="wsl" scheme="liu233w.github.io/tags/wsl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpaceShift 在实际使用中的问题</title>
-    <link href="liu233w.github.io/2017/05/12/space-as-shift.org/"/>
-    <id>liu233w.github.io/2017/05/12/space-as-shift.org/</id>
-    <published>2017-05-11T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="键盘" scheme="liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
@@ -561,39 +589,9 @@ bash.exe&amp;quot;:
   </entry>
   
   <entry>
-    <title>HDU-4825 Xor Sum（OJ 优化实验）</title>
-    <link href="liu233w.github.io/2016/07/25/hdu-4825.org/"/>
-    <id>liu233w.github.io/2016/07/25/hdu-4825.org/</id>
-    <published>2016-07-24T16:00:00.000Z</published>
-    <updated>2018-03-25T14:26:29.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;题目：&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;提交语言：c++ vs g++&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="acm" scheme="liu233w.github.io/categories/acm/"/>
-    
-    
-      <category term="acm" scheme="liu233w.github.io/tags/acm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UVA-10020 Minimal coverage</title>
-    <link href="liu233w.github.io/2016/07/25/uva-10020.org/"/>
-    <id>liu233w.github.io/2016/07/25/uva-10020.org/</id>
+    <title>UVA-10033 Interpreter</title>
+    <link href="liu233w.github.io/2016/07/25/uva-10033.org/"/>
+    <id>liu233w.github.io/2016/07/25/uva-10033.org/</id>
     <published>2016-07-24T16:00:00.000Z</published>
     <updated>2018-03-25T14:26:29.000Z</updated>
     
