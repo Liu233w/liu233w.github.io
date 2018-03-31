@@ -47,7 +47,7 @@
     <link href="https://liu233w.github.io/2018/03/27/abp11/"/>
     <id>https://liu233w.github.io/2018/03/27/abp11/</id>
     <published>2018-03-27T08:43:36.000Z</published>
-    <updated>2018-03-31T03:42:35.185Z</updated>
+    <updated>2018-03-31T08:49:44.912Z</updated>
     
     <summary type="html">
     
@@ -124,11 +124,11 @@
       <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
     
     
-      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="vue" scheme="https://liu233w.github.io/tags/vue/"/>
     
       <category term="jest" scheme="https://liu233w.github.io/tags/jest/"/>
+    
+      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -428,11 +428,11 @@ bash.exe&amp;quot;:
       <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
     
     
+      <category term="clang" scheme="https://liu233w.github.io/tags/clang/"/>
+    
       <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
     
       <category term="LLVM" scheme="https://liu233w.github.io/tags/LLVM/"/>
-    
-      <category term="clang" scheme="https://liu233w.github.io/tags/clang/"/>
     
   </entry>
   
@@ -462,9 +462,9 @@ bash.exe&amp;quot;:
       <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
     
     
-      <category term="EGO" scheme="https://liu233w.github.io/tags/EGO/"/>
-    
       <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+    
+      <category term="EGO" scheme="https://liu233w.github.io/tags/EGO/"/>
     
   </entry>
   
