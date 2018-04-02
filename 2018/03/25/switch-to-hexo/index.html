@@ -62,24 +62,26 @@
   <main id='post'>
   <div class="content">
     <article>
-        <section class="content markdown-body">
-          <h1>从 EGO 切换到 hexo</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年03月25日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+      <section class="content markdown-body">
+        <h1>从 EGO 切换到 hexo</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2018年03月25日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/blog/">blog</a>
   </div>
 
 
 
-            
-            
-              | 
-                  <i class="fa fa-tags" aria-hidden="true"></i>
-                
-               
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
   <a href="/tags/#emacs" class='tag'>emacs</a>
 
   <a href="/tags/#前端" class='tag'>前端</a>
@@ -87,9 +89,9 @@
   <a href="/tags/#python" class='tag'>python</a>
 
 
-            
-          </div>
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我刚刚打算写一篇博文，结果发现我的 ego 坏了。回想起来我过去已经在这上面浪费了<br>太多的时间，干嘛不直接切换到更成熟的方案呢_(:3」∠)_。更何况相比于 org，我现在<br>markdown写的更多了。于是我花了两个小时把原先的博客转换到了hexo里面。</p>
+          
+        </div>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我刚刚打算写一篇博文，结果发现我的 ego 坏了。回想起来我过去已经在这上面浪费了<br>太多的时间，干嘛不直接切换到更成熟的方案呢_(:3」∠)_。更何况相比于 org，我现在<br>markdown写的更多了。于是我花了两个小时把原先的博客转换到了hexo里面。</p>
 <p>在这里记述一下切换的经过，方便后来想要退坑的人。</p>
 <h1 id="批量从-org-转换到-markdown"><a href="#批量从-org-转换到-markdown" class="headerlink" title="批量从 org 转换到 markdown"></a>批量从 org 转换到 markdown</h1><p>我写了几行elisp来搞定这件事。</p>
 <p>首先从网上抄来一个函数，稍微改了一下，用来获取当前目录下的所有 org 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">(defun files-in-below-directory (directory)</span><br><span class="line">  &quot;List the .el files in DIRECTORY and in its sub-directories.&quot;</span><br><span class="line">  ;; Although the function will be used non-interactively,</span><br><span class="line">  ;; it will be easier to test if we make it interactive.</span><br><span class="line">  ;; The directory will have a name such as</span><br><span class="line">  ;;  &quot;/usr/local/share/emacs/22.1.1/lisp/&quot;</span><br><span class="line">  (interactive &quot;DDirectory name: &quot;)</span><br><span class="line">  (let (el-files-list</span><br><span class="line">        (current-directory-list</span><br><span class="line">         (directory-files-and-attributes directory t)))</span><br><span class="line">    ;; while we are in the current directory</span><br><span class="line">    (while current-directory-list</span><br><span class="line">      (cond</span><br><span class="line">       ;; check to see whether filename ends in &apos;.el&apos;</span><br><span class="line">       ;; and if so, add its name to a list.</span><br><span class="line">       ((equal &quot;.org&quot; (substring (car (car current-directory-list)) -4))</span><br><span class="line">        (setq el-files-list</span><br><span class="line">              (cons (car (car current-directory-list)) el-files-list)))</span><br><span class="line">       ;; check whether filename is that of a directory</span><br><span class="line">       ((eq t (car (cdr (car current-directory-list))))</span><br><span class="line">        ;; decide whether to skip or recurse</span><br><span class="line">        (if</span><br><span class="line">            (equal &quot;.&quot;</span><br><span class="line">                   (substring (car (car current-directory-list)) -1))</span><br><span class="line">            ;; then do nothing since filename is that of</span><br><span class="line">            ;;   current directory or parent, &quot;.&quot; or &quot;..&quot;</span><br><span class="line">            ()</span><br><span class="line">          ;; else descend into the directory and repeat the process</span><br><span class="line">          (setq el-files-list</span><br><span class="line">                (append</span><br><span class="line">                 (files-in-below-directory</span><br><span class="line">                  (car (car current-directory-list)))</span><br><span class="line">                 el-files-list)))))</span><br><span class="line">      ;; move to the next filename in the list; this also</span><br><span class="line">      ;; shortens the list so the while loop eventually comes to an end</span><br><span class="line">      (setq current-directory-list (cdr current-directory-list)))</span><br><span class="line">    ;; return the filenames</span><br><span class="line">    el-files-list))</span><br></pre></td></tr></table></figure></p>
@@ -101,32 +103,50 @@
 <p>你可以视情况改一下里面的几个变量。由于我以前还用过 org-page，这些文件里面有的文件<br>只有 <code>Keywords</code> 没有 <code>Tags</code>，正好趁这个机会合并一下。</p>
 <h1 id="修改其他内容"><a href="#修改其他内容" class="headerlink" title="修改其他内容"></a>修改其他内容</h1><p>比如说org里的图片什么的，由于我也没有几张，就 ag 出来手动改了。</p>
 
-        </section>
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
     </article>
     
-        <!-- disqus 评论框 start -->
-        <div class="comment">
-            <div id="disqus_thread" class="disqus-thread">
-              <i>加载评论框需要翻墙</i>
-            </div>
-        </div>
-        <!-- disqus 评论框 end -->
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
     
     
-        <!-- livere 评论框 start -->
-        <div class="comment">
-            <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
-        </div>
-        <!-- livere 评论框 end -->
-        
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
   </div>
   <aside>
     
     <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#批量从-org-转换到-markdown"><span class="toc-number">2.</span> <span class="toc-text">批量从 org 转换到 markdown</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从org获取元信息"><span class="toc-number">3.</span> <span class="toc-text">从org获取元信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改其他内容"><span class="toc-number">4.</span> <span class="toc-text">修改其他内容</span></a></li></ol>
-        </div>
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#批量从-org-转换到-markdown"><span class="toc-number">2.</span> <span class="toc-text">批量从 org 转换到 markdown</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#从org获取元信息"><span class="toc-number">3.</span> <span class="toc-text">从org获取元信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改其他内容"><span class="toc-number">4.</span> <span class="toc-text">修改其他内容</span></a></li></ol>
+      </div>
     </div>
     
   </aside>
@@ -147,24 +167,25 @@
     var xhr = new XMLHttpRequest();
     var called = false;
     xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-      called = true;
-      cb(true);
+        called = true;
+        cb(true);
       }
     };
     xhr.send();
     // timeout 1s, this facebook API is very fast.
-    setTimeout(function() {
+    setTimeout(function () {
       if (!called) {
-      xhr.abort();
-      cb(false)
+        xhr.abort();
+        cb(false)
       }
     }, 1000);
   }
 
   function getDisqus(isAgent) {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
     dsq.async = true
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
@@ -174,16 +195,18 @@
 
 
 <script type="text/javascript">
-  (function(d, s) {
-      var j, e = d.getElementsByTagName(s)[0];
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
 
-      if (typeof LivereTower === 'function') { return; }
+    if (typeof LivereTower === 'function') {
+      return;
+    }
 
-      j = d.createElement(s);
-      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-      j.async = true;
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
 
-      e.parentNode.insertBefore(j, e);
+    e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
 
@@ -195,11 +218,6 @@
     </div>
     <div>
       Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-    <div class="license">
-      <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">
-        <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License" class="center">
-      </a>
     </div>
   </div>
 </footer>
