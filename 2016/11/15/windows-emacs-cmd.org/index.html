@@ -62,30 +62,32 @@
   <main id='post'>
   <div class="content">
     <article>
-        <section class="content markdown-body">
-          <h1>windows 下用来快速启动 emacs client 的脚本</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年11月15日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+      <section class="content markdown-body">
+        <h1>windows 下用来快速启动 emacs client 的脚本</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年11月15日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/blog/">blog</a>
   </div>
 
 
 
-            
-            
-              | 
-                  <i class="fa fa-tag" aria-hidden="true"></i>
-                
-               
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
   <a href="/tags/#emacs" class='tag'>emacs</a>
 
 
-            
-          </div>
-          <p>我一直在 windows 下使用 emacs 的 client 模式。但是有一件事情让我非常的不爽，就是有时候 emacs server 在关闭之后不会自动清除掉 server 文件，导致下次打开的时候也不会用新的 server 文件覆盖原来的，令 client 程序无法正常开启。于是我写了下面这个脚本，可以在开 启 emacs 之前强制删除 server 文件：</p>
+          
+        </div>
+        <p>我一直在 windows 下使用 emacs 的 client 模式。但是有一件事情让我非常的不爽，就是有时候 emacs server 在关闭之后不会自动清除掉 server 文件，导致下次打开的时候也不会用新的 server 文件覆盖原来的，令 client 程序无法正常开启。于是我写了下面这个脚本，可以在开 启 emacs 之前强制删除 server 文件：</p>
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> serverPath=home\.emacs.d\server\server</span><br><span class="line"><span class="built_in">set</span> executePath=bin\runemacs.exe</span><br><span class="line"></span><br><span class="line"><span class="built_in">del</span> <span class="variable">%~dp0%</span>serverPath%</span><br><span class="line"><span class="built_in">start</span> /b <span class="variable">%~dp0%</span>executePath% %<span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>请确保路径正确，我将脚本放在了 emacs 根目录，就是有 bin 之类文件夹的地方。而 home 目 录也在这个路径的 home 文件夹下。脚本命名为 <code>remove-server-file-and-run.cmd</code> 。 <code>start</code> 命令可以让 emacs 启动的时候不会保留命令行的黑框。</p>
 <p>还有另一个脚本可以让 client 无法启动的时候运行上面的脚本来创建一个 server：</p>
@@ -94,24 +96,42 @@
 <p>这样，我们就可以使用 <code>run-client-or-start-server.cmd 文件名</code> 来打开对应的文件了。 如果服务器不存在或 server 文件失效，脚本会自动删除 server 文件并开启一个新的 emacs 来 打开当前文件。如果你在 emacs 的配置中进行了一些设置的话，emacs 的启动会开启一个新的 server。</p>
 <p>比如在 total commander 中可以将上面的脚本绑定到一个快捷键上，然后一键用 emacs 打开文件。。。</p>
 
-        </section>
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
     </article>
     
-        <!-- disqus 评论框 start -->
-        <div class="comment">
-            <div id="disqus_thread" class="disqus-thread">
-              <i>加载评论框需要翻墙</i>
-            </div>
-        </div>
-        <!-- disqus 评论框 end -->
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
     
     
-        <!-- livere 评论框 start -->
-        <div class="comment">
-            <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
-        </div>
-        <!-- livere 评论框 end -->
-        
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
   </div>
   <aside>
     
@@ -133,24 +153,25 @@
     var xhr = new XMLHttpRequest();
     var called = false;
     xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-      called = true;
-      cb(true);
+        called = true;
+        cb(true);
       }
     };
     xhr.send();
     // timeout 1s, this facebook API is very fast.
-    setTimeout(function() {
+    setTimeout(function () {
       if (!called) {
-      xhr.abort();
-      cb(false)
+        xhr.abort();
+        cb(false)
       }
     }, 1000);
   }
 
   function getDisqus(isAgent) {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
     dsq.async = true
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
@@ -160,16 +181,18 @@
 
 
 <script type="text/javascript">
-  (function(d, s) {
-      var j, e = d.getElementsByTagName(s)[0];
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
 
-      if (typeof LivereTower === 'function') { return; }
+    if (typeof LivereTower === 'function') {
+      return;
+    }
 
-      j = d.createElement(s);
-      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-      j.async = true;
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
 
-      e.parentNode.insertBefore(j, e);
+    e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
 
@@ -181,11 +204,6 @@
     </div>
     <div>
       Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-    <div class="license">
-      <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">
-        <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License" class="center">
-      </a>
     </div>
   </div>
 </footer>

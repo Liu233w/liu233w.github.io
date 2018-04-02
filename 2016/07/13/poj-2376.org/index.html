@@ -62,30 +62,32 @@
   <main id='post'>
   <div class="content">
     <article>
-        <section class="content markdown-body">
-          <h1>poj-2376 Cleaning Shifts</h1>
-          <div class='post-meta'>
-            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年07月13日</time>
-            
-              | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+      <section class="content markdown-body">
+        <h1>poj-2376 Cleaning Shifts</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年07月13日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/acm/">acm</a>
   </div>
 
 
 
-            
-            
-              | 
-                  <i class="fa fa-tag" aria-hidden="true"></i>
-                
-               
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
   <a href="/tags/#acm" class='tag'>acm</a>
 
 
-            
-          </div>
-          <ul>
+          
+        </div>
+        <ul>
 <li><a href="#sec-">题目：</a></li>
 <li><a href="#sec-">代码：</a></li>
 <li><a href="#sec-">解析&amp;吐槽：</a></li>
@@ -97,32 +99,50 @@
 <p>首先，尽管题目没说，但是题目是有多组数据的！其次，如果上一个节点覆盖的区间是 i-j，下一个节点覆盖的区间可以从 j+1 开始。 最后，要覆盖的区间是从 1 开始，到 T 结束的。</p>
 <p>在做题的时候也要注意几方面：题目可能会有无法覆盖整个区间的情况（无解），对于排过序的区间数据，如果第一个数据的区间左端点 大于 1 或者最后一个数据的右端点小于 T；就无解，如果遍历的时候不是以数据的索引作为循环变量的话，一定要注意判断是否达到的 最后一个数据。还要注意如果贪心策略是选择左端点不大于上一个选择的右端点（加一）的长度最大的区间，我的方法是如果判断下一 个数据比上一个更好的话，就更新记录的右端点，不自增计数。这样的话，排序的时候只需要考虑左端点，右端点不用管。我这里用 pair 来保存数据，它的比较函数会先比较 first 元素，在相等时再比较 second。我写的那个比较函数实际上是用不到的。还有我看到 有很多题解都会考虑输入数据中第一个比第二个大的情况，实测这个是不需要判断的，我注释掉了那段代码仍然可以 ac（见第 45 行）。</p>
 
-        </section>
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
     </article>
     
-        <!-- disqus 评论框 start -->
-        <div class="comment">
-            <div id="disqus_thread" class="disqus-thread">
-              <i>加载评论框需要翻墙</i>
-            </div>
-        </div>
-        <!-- disqus 评论框 end -->
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
     
     
-        <!-- livere 评论框 start -->
-        <div class="comment">
-            <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
-        </div>
-        <!-- livere 评论框 end -->
-        
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
   </div>
   <aside>
     
     <div class="toc-container">
-        <h1>目录</h1>
-        <div class="content">
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目："><span class="toc-number">1.</span> <span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码："><span class="toc-number">2.</span> <span class="toc-text">代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解析-amp-吐槽："><span class="toc-number">3.</span> <span class="toc-text">解析&amp;吐槽：</span></a></li></ol>
-        </div>
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目："><span class="toc-number">1.</span> <span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码："><span class="toc-number">2.</span> <span class="toc-text">代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#解析-amp-吐槽："><span class="toc-number">3.</span> <span class="toc-text">解析&amp;吐槽：</span></a></li></ol>
+      </div>
     </div>
     
   </aside>
@@ -143,24 +163,25 @@
     var xhr = new XMLHttpRequest();
     var called = false;
     xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
-      called = true;
-      cb(true);
+        called = true;
+        cb(true);
       }
     };
     xhr.send();
     // timeout 1s, this facebook API is very fast.
-    setTimeout(function() {
+    setTimeout(function () {
       if (!called) {
-      xhr.abort();
-      cb(false)
+        xhr.abort();
+        cb(false)
       }
     }, 1000);
   }
 
   function getDisqus(isAgent) {
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; 
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
     dsq.async = true
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
@@ -170,16 +191,18 @@
 
 
 <script type="text/javascript">
-  (function(d, s) {
-      var j, e = d.getElementsByTagName(s)[0];
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
 
-      if (typeof LivereTower === 'function') { return; }
+    if (typeof LivereTower === 'function') {
+      return;
+    }
 
-      j = d.createElement(s);
-      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-      j.async = true;
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
 
-      e.parentNode.insertBefore(j, e);
+    e.parentNode.insertBefore(j, e);
   })(document, 'script');
 </script>
 
@@ -191,11 +214,6 @@
     </div>
     <div>
       Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
-    </div>
-    <div class="license">
-      <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">
-        <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License" class="center">
-      </a>
     </div>
   </div>
 </footer>
