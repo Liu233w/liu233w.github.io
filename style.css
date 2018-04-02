@@ -35,10 +35,6 @@ footer .copyright {
   footer .copyright a:hover {
     color: #007fff; }
 
-.license {
-  float: right;
-  padding: 10px; }
-
 header {
   background: #fff;
   border-bottom: 1px solid #f1f1f1;
@@ -615,6 +611,10 @@ header {
     background-color: #ffecec; }
   .markdown-body .code .link {
     text-decoration: underline; }
+
+.license {
+  text-align: center;
+  margin-top: 10px; }
 
 #index li {
   list-style: none; }
