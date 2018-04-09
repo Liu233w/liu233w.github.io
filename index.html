@@ -77,6 +77,41 @@
   <div class="posts-list">
     
       <section>
+        <a href="/2018/04/10/netcore-sonar-travis/">
+          <h3 class='post-head'>
+            使用 Travis 和 SonarCloud(SonarAnalyzer) 对 .Net Core 项目进行分析
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>最近 SonarC# 加上了对 .Net Core 的支持，而且可以在 Linux 上运行 C# 的分析了。这样的话，就可以用 Travis-CI 对代码进行持续分析，并且自动将结果上传到 SonarCloud 上。要启用这个功能，只需要在 <code>.travis.yml</code> 里面加上 SonarCloud Addon（如果你用的话），然后在 install 字段里面下载sonar-scanner-msbuild的压缩包并运行即可。代码：</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年04月10日</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#.Net Core" class='tag'>.Net Core</a>
+
+  <a href="/tags/#Travis-CI" class='tag'>Travis-CI</a>
+
+  <a href="/tags/#SonarCloud" class='tag'>SonarCloud</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
         <a href="/2018/04/02/vim-paste-in-command/">
           <h3 class='post-head'>
             Vim 在插入模式下粘贴的方法
@@ -315,11 +350,50 @@
                 <i class="fa fa-tags" aria-hidden="true"></i>
               
              
-  <a href="/tags/#前端" class='tag'>前端</a>
-
   <a href="/tags/#vue" class='tag'>vue</a>
 
   <a href="/tags/#jest" class='tag'>jest</a>
+
+  <a href="/tags/#前端" class='tag'>前端</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2017/05/12/space-as-shift.org/">
+          <h3 class='post-head'>
+            SpaceShift 在实际使用中的问题
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可 以用拇指来轻松地输入大写字母，原先的 shift 键也可以改成退格键之类的，来进一步减少 手指在键盘上移动的距离。在昨天，我终于下定决心在自己的电脑上实验这种用法了，然而 我很快发现这种做法看起来不错，但实用性很差。</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年05月12日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tag" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#键盘" class='tag'>键盘</a>
 
 
           
@@ -368,45 +442,6 @@
       </section>
     
       <section>
-        <a href="/2017/05/12/space-as-shift.org/">
-          <h3 class='post-head'>
-            SpaceShift 在实际使用中的问题
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可 以用拇指来轻松地输入大写字母，原先的 shift 键也可以改成退格键之类的，来进一步减少 手指在键盘上移动的距离。在昨天，我终于下定决心在自己的电脑上实验这种用法了，然而 我很快发现这种做法看起来不错，但实用性很差。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年05月12日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tag" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#键盘" class='tag'>键盘</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
         <a href="/2017/04/13/run-kaspersky-by-schedule.org/">
           <h3 class='post-head'>
             在 windows 下使用计划任务来启动卡巴斯基杀毒软件的正确姿势
@@ -439,45 +474,6 @@
               
              
   <a href="/tags/#windows" class='tag'>windows</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2017/02/24/sicp-1-16.org/">
-          <h3 class='post-head'>
-            SICP 1.16 题 题解
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <ul>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年02月24日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tag" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#sicp" class='tag'>sicp</a>
 
 
           

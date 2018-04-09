@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://liu233w.github.io/"/>
-  <updated>2018-04-02T07:39:03.942Z</updated>
+  <updated>2018-04-09T16:32:59.006Z</updated>
   <id>https://liu233w.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用 Travis 和 SonarCloud(SonarAnalyzer) 对 .Net Core 项目进行分析</title>
+    <link href="https://liu233w.github.io/2018/04/10/netcore-sonar-travis/"/>
+    <id>https://liu233w.github.io/2018/04/10/netcore-sonar-travis/</id>
+    <published>2018-04-09T16:14:33.000Z</published>
+    <updated>2018-04-09T16:32:59.006Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近 SonarC# 加上了对 .Net Core 的支持，而且可以在 Linux 上运行 C# 的分析了。这样的话，就可以用 Travis-CI 对代码进行持续分析，并且自动将结果上传到 SonarCloud 上。要启用这个功能，只需要在
+        
+      
+    
+    </summary>
+    
+    
+      <category term=".Net Core" scheme="https://liu233w.github.io/tags/Net-Core/"/>
+    
+      <category term="Travis-CI" scheme="https://liu233w.github.io/tags/Travis-CI/"/>
+    
+      <category term="SonarCloud" scheme="https://liu233w.github.io/tags/SonarCloud/"/>
+    
+  </entry>
   
   <entry>
     <title>Vim 在插入模式下粘贴的方法</title>
@@ -181,11 +209,37 @@
       <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
     
     
-      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
       <category term="vue" scheme="https://liu233w.github.io/tags/vue/"/>
     
       <category term="jest" scheme="https://liu233w.github.io/tags/jest/"/>
+    
+      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpaceShift 在实际使用中的问题</title>
+    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
+    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
@@ -217,32 +271,6 @@ bash.exe&amp;quot;:
       <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
     
       <category term="wsl" scheme="https://liu233w.github.io/tags/wsl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpaceShift 在实际使用中的问题</title>
-    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
-    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
-    <published>2017-05-11T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
@@ -576,32 +604,6 @@ bash.exe&amp;quot;:
 &lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;解析&amp;amp;吐槽：&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&quot;题目：&quot;&gt;&lt;a href=&quot;#题目：&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="acm" scheme="https://liu233w.github.io/categories/acm/"/>
-    
-    
-      <category term="acm" scheme="https://liu233w.github.io/tags/acm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OJ 中使用 fread 加速读入</title>
-    <link href="https://liu233w.github.io/2016/08/20/fread.org/"/>
-    <id>https://liu233w.github.io/2016/08/20/fread.org/</id>
-    <published>2016-08-19T16:00:00.000Z</published>
-    <updated>2018-03-25T14:26:29.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;关于 fread 加速读入的说明请参考 &lt;a
         
       
     
