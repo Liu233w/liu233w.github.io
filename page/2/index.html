@@ -77,6 +77,45 @@
   <div class="posts-list">
     
       <section>
+        <a href="/2017/04/13/run-kaspersky-by-schedule.org/">
+          <h3 class='post-head'>
+            在 windows 下使用计划任务来启动卡巴斯基杀毒软件的正确姿势
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>最近我又有了一个奇葩的需求，需要在计划任务里面启动卡巴斯基杀毒软件。然而很快我发 现，没办法通过把可执行文件路径直接放进计划任务的“启动程序”里面的方式来启动它。 如果这样的话，启动计划任务时只会在后台启动一个进程，软件的图标甚至不会出现在托盘 区里面。即使把启动命令改成 <code>start 程序路径</code> 也没法正常启动。但直接在 cmd 里面输入 程序的路径是可以正常打开的。所以我用了一个曲线救国的解决办法，把执行路径写进一个 批处理脚本里面，如下所示：</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017年04月13日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tag" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#windows" class='tag'>windows</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
         <a href="/2017/02/24/sicp-1-16.org/">
           <h3 class='post-head'>
             SICP 1.16 题 题解
@@ -439,45 +478,6 @@
   <a href="/tags/#emacs" class='tag'>emacs</a>
 
   <a href="/tags/#emacs package" class='tag'>emacs package</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2016/08/20/poj-1330.org/">
-          <h3 class='post-head'>
-            POJ-1330 Nearest Common Ancestors
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <ul>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月20日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/acm/">acm</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tag" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#acm" class='tag'>acm</a>
 
 
           
