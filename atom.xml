@@ -123,9 +123,9 @@
     
       <category term="Web 开发" scheme="https://liu233w.github.io/tags/Web-%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Asp.Net" scheme="https://liu233w.github.io/tags/Asp-Net/"/>
-    
       <category term="AspNetBoilerplate" scheme="https://liu233w.github.io/tags/AspNetBoilerplate/"/>
+    
+      <category term="Asp.Net" scheme="https://liu233w.github.io/tags/Asp-Net/"/>
     
   </entry>
   
@@ -575,9 +575,9 @@ bash.exe&amp;quot;:
       <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
-    
       <category term="EGO" scheme="https://liu233w.github.io/tags/EGO/"/>
+    
+      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
     
   </entry>
   
