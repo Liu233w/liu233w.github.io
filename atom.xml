@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://liu233w.github.io/"/>
-  <updated>2018-04-25T10:05:04.597Z</updated>
+  <updated>2018-05-06T14:18:51.223Z</updated>
   <id>https://liu233w.github.io/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>npm5中本地间模块引用的最好方式（个人认为）</title>
+    <title>在 Nuxt 中修改 uglifyjs 的配置</title>
+    <link href="https://liu233w.github.io/2018/05/06/nuxt-uglify-config/"/>
+    <id>https://liu233w.github.io/2018/05/06/nuxt-uglify-config/</id>
+    <published>2018-05-06T14:10:18.000Z</published>
+    <updated>2018-05-06T14:18:51.223Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;假如需要修改 Nuxt 中 UglifyJs 的配置的话，可以直接在 &lt;code&gt;nuxt.config.js&lt;/code&gt; 的 &lt;code&gt;build&lt;/code&gt; 中添加一个 &lt;code&gt;uglify&lt;/code&gt; 字段。如果其值是一个对象的话，对象的内容会跟
+        
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="web" scheme="https://liu233w.github.io/tags/web/"/>
+    
+      <category term="vue" scheme="https://liu233w.github.io/tags/vue/"/>
+    
+      <category term="nuxt" scheme="https://liu233w.github.io/tags/nuxt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>npm5中本地间模块引用的最好方式（附带引用方法总结）</title>
     <link href="https://liu233w.github.io/2018/04/24/npm5-install-folder-link/"/>
     <id>https://liu233w.github.io/2018/04/24/npm5-install-folder-link/</id>
     <published>2018-04-24T15:51:41.000Z</published>
-    <updated>2018-04-25T10:05:04.597Z</updated>
+    <updated>2018-05-06T14:21:04.203Z</updated>
     
     <summary type="html">
     
@@ -123,9 +153,9 @@
     
       <category term="Web 开发" scheme="https://liu233w.github.io/tags/Web-%E5%BC%80%E5%8F%91/"/>
     
-      <category term="AspNetBoilerplate" scheme="https://liu233w.github.io/tags/AspNetBoilerplate/"/>
-    
       <category term="Asp.Net" scheme="https://liu233w.github.io/tags/Asp-Net/"/>
+    
+      <category term="AspNetBoilerplate" scheme="https://liu233w.github.io/tags/AspNetBoilerplate/"/>
     
   </entry>
   
@@ -246,32 +276,6 @@
   </entry>
   
   <entry>
-    <title>SpaceShift 在实际使用中的问题</title>
-    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
-    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
-    <published>2017-05-11T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
-    
-  </entry>
-  
-  <entry>
     <title>WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因</title>
     <link href="https://liu233w.github.io/2017/05/12/wsl-bash.org/"/>
     <id>https://liu233w.github.io/2017/05/12/wsl-bash.org/</id>
@@ -299,6 +303,32 @@ bash.exe&amp;quot;:
       <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
     
       <category term="wsl" scheme="https://liu233w.github.io/tags/wsl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpaceShift 在实际使用中的问题</title>
+    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
+    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
@@ -575,42 +605,9 @@ bash.exe&amp;quot;:
       <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
     
     
+      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+    
       <category term="EGO" scheme="https://liu233w.github.io/tags/EGO/"/>
-    
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>写了一个 emacs package：number-lock.el</title>
-    <link href="https://liu233w.github.io/2016/08/21/programming-mode.org/"/>
-    <id>https://liu233w.github.io/2016/08/21/programming-mode.org/</id>
-    <published>2016-08-20T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;项目简介&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;另一种实现方式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;16/8/30 更新&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&quot;项目简介&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
-    
-      <category term="emacs package" scheme="https://liu233w.github.io/tags/emacs-package/"/>
     
   </entry>
   
