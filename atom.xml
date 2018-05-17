@@ -5,9 +5,9 @@
   <subtitle>by 不科学的科学君</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://liu233w.github.io/"/>
+  <link href="/"/>
   <updated>2018-05-13T06:58:18.625Z</updated>
-  <id>https://liu233w.github.io/</id>
+  <id>/</id>
   
   <author>
     <name>Liu233w</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>在 .Net Core 中使用 Xunit 进行单元测试的奇葩问题</title>
-    <link href="https://liu233w.github.io/2018/05/13/xunit-debug-assert/"/>
-    <id>https://liu233w.github.io/2018/05/13/xunit-debug-assert/</id>
+    <link href="/2018/05/13/xunit-debug-assert/"/>
+    <id>/2018/05/13/xunit-debug-assert/</id>
     <published>2018-05-13T06:44:08.000Z</published>
     <updated>2018-05-13T06:58:18.625Z</updated>
     
@@ -36,19 +36,19 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term=".Net Core" scheme="https://liu233w.github.io/tags/Net-Core/"/>
+      <category term=".Net Core" scheme="/tags/Net-Core/"/>
     
-      <category term="XUnit" scheme="https://liu233w.github.io/tags/XUnit/"/>
+      <category term="XUnit" scheme="/tags/XUnit/"/>
     
   </entry>
   
   <entry>
     <title>在 Nuxt 中修改 uglifyjs 的配置</title>
-    <link href="https://liu233w.github.io/2018/05/06/nuxt-uglify-config/"/>
-    <id>https://liu233w.github.io/2018/05/06/nuxt-uglify-config/</id>
+    <link href="/2018/05/06/nuxt-uglify-config/"/>
+    <id>/2018/05/06/nuxt-uglify-config/</id>
     <published>2018-05-06T14:10:18.000Z</published>
     <updated>2018-05-06T14:18:51.223Z</updated>
     
@@ -65,20 +65,20 @@
     </summary>
     
     
-      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="vue" scheme="https://liu233w.github.io/tags/vue/"/>
+      <category term="vue" scheme="/tags/vue/"/>
     
-      <category term="web" scheme="https://liu233w.github.io/tags/web/"/>
+      <category term="web" scheme="/tags/web/"/>
     
-      <category term="nuxt" scheme="https://liu233w.github.io/tags/nuxt/"/>
+      <category term="nuxt" scheme="/tags/nuxt/"/>
     
   </entry>
   
   <entry>
     <title>npm5中本地间模块引用的最好方式（附带引用方法总结）</title>
-    <link href="https://liu233w.github.io/2018/04/24/npm5-install-folder-link/"/>
-    <id>https://liu233w.github.io/2018/04/24/npm5-install-folder-link/</id>
+    <link href="/2018/04/24/npm5-install-folder-link/"/>
+    <id>/2018/04/24/npm5-install-folder-link/</id>
     <published>2018-04-24T15:51:41.000Z</published>
     <updated>2018-05-06T14:21:04.203Z</updated>
     
@@ -94,19 +94,19 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="npm" scheme="https://liu233w.github.io/tags/npm/"/>
+      <category term="npm" scheme="/tags/npm/"/>
     
   </entry>
   
   <entry>
     <title>使用 Travis 和 SonarCloud(SonarAnalyzer) 对 .Net Core 项目进行分析</title>
-    <link href="https://liu233w.github.io/2018/04/10/netcore-sonar-travis/"/>
-    <id>https://liu233w.github.io/2018/04/10/netcore-sonar-travis/</id>
+    <link href="/2018/04/10/netcore-sonar-travis/"/>
+    <id>/2018/04/10/netcore-sonar-travis/</id>
     <published>2018-04-09T16:14:33.000Z</published>
     <updated>2018-04-09T16:32:59.006Z</updated>
     
@@ -123,18 +123,18 @@
     </summary>
     
     
-      <category term=".Net Core" scheme="https://liu233w.github.io/tags/Net-Core/"/>
+      <category term=".Net Core" scheme="/tags/Net-Core/"/>
     
-      <category term="Travis-CI" scheme="https://liu233w.github.io/tags/Travis-CI/"/>
+      <category term="Travis-CI" scheme="/tags/Travis-CI/"/>
     
-      <category term="SonarCloud" scheme="https://liu233w.github.io/tags/SonarCloud/"/>
+      <category term="SonarCloud" scheme="/tags/SonarCloud/"/>
     
   </entry>
   
   <entry>
     <title>Vim 在插入模式下粘贴的方法</title>
-    <link href="https://liu233w.github.io/2018/04/02/vim-paste-in-command/"/>
-    <id>https://liu233w.github.io/2018/04/02/vim-paste-in-command/</id>
+    <link href="/2018/04/02/vim-paste-in-command/"/>
+    <id>/2018/04/02/vim-paste-in-command/</id>
     <published>2018-04-02T03:47:24.000Z</published>
     <updated>2018-04-02T07:39:03.942Z</updated>
     
@@ -151,17 +151,17 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="Vim" scheme="https://liu233w.github.io/tags/Vim/"/>
+      <category term="Vim" scheme="/tags/Vim/"/>
     
   </entry>
   
   <entry>
     <title>ABP 通知系统数据表结构及源码分析</title>
-    <link href="https://liu233w.github.io/2018/04/02/abp23-notification/"/>
-    <id>https://liu233w.github.io/2018/04/02/abp23-notification/</id>
+    <link href="/2018/04/02/abp23-notification/"/>
+    <id>/2018/04/02/abp23-notification/</id>
     <published>2018-04-02T02:52:38.000Z</published>
     <updated>2018-04-02T07:39:03.942Z</updated>
     
@@ -177,21 +177,21 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="Web 开发" scheme="https://liu233w.github.io/tags/Web-%E5%BC%80%E5%8F%91/"/>
+      <category term="Web 开发" scheme="/tags/Web-%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Asp.Net" scheme="https://liu233w.github.io/tags/Asp-Net/"/>
+      <category term="AspNetBoilerplate" scheme="/tags/AspNetBoilerplate/"/>
     
-      <category term="AspNetBoilerplate" scheme="https://liu233w.github.io/tags/AspNetBoilerplate/"/>
+      <category term="Asp.Net" scheme="/tags/Asp-Net/"/>
     
   </entry>
   
   <entry>
     <title>GraphQL：BFF架构资料 （兼谈合并多个 Schema 的方式）</title>
-    <link href="https://liu233w.github.io/2018/03/30/graphql-merge-schema/"/>
-    <id>https://liu233w.github.io/2018/03/30/graphql-merge-schema/</id>
+    <link href="/2018/03/30/graphql-merge-schema/"/>
+    <id>/2018/03/30/graphql-merge-schema/</id>
     <published>2018-03-30T13:21:09.000Z</published>
     <updated>2018-03-31T03:42:28.384Z</updated>
     
@@ -207,17 +207,17 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="Web 开发" scheme="https://liu233w.github.io/tags/Web-%E5%BC%80%E5%8F%91/"/>
+      <category term="Web 开发" scheme="/tags/Web-%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>在 ABP 2.3 和 Vue 单页应用中的踩坑总结</title>
-    <link href="https://liu233w.github.io/2018/03/27/abp11/"/>
-    <id>https://liu233w.github.io/2018/03/27/abp11/</id>
+    <link href="/2018/03/27/abp11/"/>
+    <id>/2018/03/27/abp11/</id>
     <published>2018-03-27T08:43:36.000Z</published>
     <updated>2018-03-31T08:49:44.912Z</updated>
     
@@ -233,21 +233,21 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="Web 开发" scheme="https://liu233w.github.io/tags/Web-%E5%BC%80%E5%8F%91/"/>
+      <category term="Web 开发" scheme="/tags/Web-%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Asp.Net" scheme="https://liu233w.github.io/tags/Asp-Net/"/>
+      <category term="Asp.Net" scheme="/tags/Asp-Net/"/>
     
-      <category term="Vue" scheme="https://liu233w.github.io/tags/Vue/"/>
+      <category term="Vue" scheme="/tags/Vue/"/>
     
   </entry>
   
   <entry>
     <title>从 EGO 切换到 hexo</title>
-    <link href="https://liu233w.github.io/2018/03/25/switch-to-hexo/"/>
-    <id>https://liu233w.github.io/2018/03/25/switch-to-hexo/</id>
+    <link href="/2018/03/25/switch-to-hexo/"/>
+    <id>/2018/03/25/switch-to-hexo/</id>
     <published>2018-03-25T14:56:48.000Z</published>
     <updated>2018-03-31T03:42:17.540Z</updated>
     
@@ -263,21 +263,21 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+      <category term="emacs" scheme="/tags/emacs/"/>
     
-      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="python" scheme="https://liu233w.github.io/tags/python/"/>
+      <category term="python" scheme="/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>Nuxt+Jest 构建页面级的快照测试</title>
-    <link href="https://liu233w.github.io/2018/03/25/nuxt-jest-snapshot/"/>
-    <id>https://liu233w.github.io/2018/03/25/nuxt-jest-snapshot/</id>
+    <link href="/2018/03/25/nuxt-jest-snapshot/"/>
+    <id>/2018/03/25/nuxt-jest-snapshot/</id>
     <published>2018-03-24T16:00:00.000Z</published>
     <updated>2018-03-25T15:17:15.656Z</updated>
     
@@ -293,21 +293,21 @@
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="前端" scheme="https://liu233w.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="vue" scheme="https://liu233w.github.io/tags/vue/"/>
+      <category term="vue" scheme="/tags/vue/"/>
     
-      <category term="jest" scheme="https://liu233w.github.io/tags/jest/"/>
+      <category term="jest" scheme="/tags/jest/"/>
     
   </entry>
   
   <entry>
     <title>WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因</title>
-    <link href="https://liu233w.github.io/2017/05/12/wsl-bash.org/"/>
-    <id>https://liu233w.github.io/2017/05/12/wsl-bash.org/</id>
+    <link href="/2017/05/12/wsl-bash.org/"/>
+    <id>/2017/05/12/wsl-bash.org/</id>
     <published>2017-05-11T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -326,19 +326,19 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
+      <category term="windows" scheme="/tags/windows/"/>
     
-      <category term="wsl" scheme="https://liu233w.github.io/tags/wsl/"/>
+      <category term="wsl" scheme="/tags/wsl/"/>
     
   </entry>
   
   <entry>
     <title>SpaceShift 在实际使用中的问题</title>
-    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
-    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <link href="/2017/05/12/space-as-shift.org/"/>
+    <id>/2017/05/12/space-as-shift.org/</id>
     <published>2017-05-11T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -354,17 +354,17 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
+      <category term="键盘" scheme="/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
   <entry>
     <title>在 windows 下使用计划任务来启动卡巴斯基杀毒软件的正确姿势</title>
-    <link href="https://liu233w.github.io/2017/04/13/run-kaspersky-by-schedule.org/"/>
-    <id>https://liu233w.github.io/2017/04/13/run-kaspersky-by-schedule.org/</id>
+    <link href="/2017/04/13/run-kaspersky-by-schedule.org/"/>
+    <id>/2017/04/13/run-kaspersky-by-schedule.org/</id>
     <published>2017-04-12T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -380,17 +380,17 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
+      <category term="windows" scheme="/tags/windows/"/>
     
   </entry>
   
   <entry>
     <title>SICP 1.16 题 题解</title>
-    <link href="https://liu233w.github.io/2017/02/24/sicp-1-16.org/"/>
-    <id>https://liu233w.github.io/2017/02/24/sicp-1-16.org/</id>
+    <link href="/2017/02/24/sicp-1-16.org/"/>
+    <id>/2017/02/24/sicp-1-16.org/</id>
     <published>2017-02-23T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -411,17 +411,17 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="sicp" scheme="https://liu233w.github.io/tags/sicp/"/>
+      <category term="sicp" scheme="/tags/sicp/"/>
     
   </entry>
   
   <entry>
     <title>windows 下用来快速启动 emacs client 的脚本</title>
-    <link href="https://liu233w.github.io/2016/11/15/windows-emacs-cmd.org/"/>
-    <id>https://liu233w.github.io/2016/11/15/windows-emacs-cmd.org/</id>
+    <link href="/2016/11/15/windows-emacs-cmd.org/"/>
+    <id>/2016/11/15/windows-emacs-cmd.org/</id>
     <published>2016-11-14T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -437,17 +437,17 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+      <category term="emacs" scheme="/tags/emacs/"/>
     
   </entry>
   
   <entry>
     <title>解决 Emacs 的 Python 交互执行环境在 windows 下无法显示中文的问题</title>
-    <link href="https://liu233w.github.io/2016/09/29/org-python-windows.org/"/>
-    <id>https://liu233w.github.io/2016/09/29/org-python-windows.org/</id>
+    <link href="/2016/09/29/org-python-windows.org/"/>
+    <id>/2016/09/29/org-python-windows.org/</id>
     <published>2016-09-28T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -467,21 +467,21 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+      <category term="emacs" scheme="/tags/emacs/"/>
     
-      <category term="org" scheme="https://liu233w.github.io/tags/org/"/>
+      <category term="org" scheme="/tags/org/"/>
     
-      <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
+      <category term="windows" scheme="/tags/windows/"/>
     
   </entry>
   
   <entry>
     <title>执行当前 buffer 中的源代码</title>
-    <link href="https://liu233w.github.io/2016/09/21/run-current-file.org/"/>
-    <id>https://liu233w.github.io/2016/09/21/run-current-file.org/</id>
+    <link href="/2016/09/21/run-current-file.org/"/>
+    <id>/2016/09/21/run-current-file.org/</id>
     <published>2016-09-20T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -501,17 +501,17 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+      <category term="emacs" scheme="/tags/emacs/"/>
     
   </entry>
   
   <entry>
     <title>在 windows 下使用快捷键安全快速地移除 USB 设备</title>
-    <link href="https://liu233w.github.io/2016/09/19/remove-usb.org/"/>
-    <id>https://liu233w.github.io/2016/09/19/remove-usb.org/</id>
+    <link href="/2016/09/19/remove-usb.org/"/>
+    <id>/2016/09/19/remove-usb.org/</id>
     <published>2016-09-18T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -532,21 +532,21 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
+      <category term="windows" scheme="/tags/windows/"/>
     
-      <category term="usb" scheme="https://liu233w.github.io/tags/usb/"/>
+      <category term="usb" scheme="/tags/usb/"/>
     
-      <category term="ahk" scheme="https://liu233w.github.io/tags/ahk/"/>
+      <category term="ahk" scheme="/tags/ahk/"/>
     
   </entry>
   
   <entry>
     <title>在 spacemacs 生成 micro-state 的同时为每个命令生成对应的执行并进入 micro-state 的函数</title>
-    <link href="https://liu233w.github.io/2016/09/02/multiple-micro-state.org/"/>
-    <id>https://liu233w.github.io/2016/09/02/multiple-micro-state.org/</id>
+    <link href="/2016/09/02/multiple-micro-state.org/"/>
+    <id>/2016/09/02/multiple-micro-state.org/</id>
     <published>2016-09-01T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -566,19 +566,19 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+      <category term="emacs" scheme="/tags/emacs/"/>
     
-      <category term="spacemacs" scheme="https://liu233w.github.io/tags/spacemacs/"/>
+      <category term="spacemacs" scheme="/tags/spacemacs/"/>
     
   </entry>
   
   <entry>
     <title>在 windows 下使用 clang（不需要重新编译）</title>
-    <link href="https://liu233w.github.io/2016/08/30/clang-windows.org/"/>
-    <id>https://liu233w.github.io/2016/08/30/clang-windows.org/</id>
+    <link href="/2016/08/30/clang-windows.org/"/>
+    <id>/2016/08/30/clang-windows.org/</id>
     <published>2016-08-29T16:00:00.000Z</published>
     <updated>2018-03-25T14:48:19.000Z</updated>
     
@@ -597,14 +597,14 @@ bash.exe&amp;quot;:
     
     </summary>
     
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+      <category term="blog" scheme="/categories/blog/"/>
     
     
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
+      <category term="emacs" scheme="/tags/emacs/"/>
     
-      <category term="LLVM" scheme="https://liu233w.github.io/tags/LLVM/"/>
+      <category term="LLVM" scheme="/tags/LLVM/"/>
     
-      <category term="clang" scheme="https://liu233w.github.io/tags/clang/"/>
+      <category term="clang" scheme="/tags/clang/"/>
     
   </entry>
   
