@@ -77,6 +77,45 @@
   <div class="posts-list">
     
       <section>
+        <a href="/2019/05/05/docker-in-docker-container-mount/">
+          <h3 class='post-head'>
+            Mount volume to a docker container running in a docker container
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h1 id="一个匪夷所思的需求"><a href="#一个匪夷所思的需求" class="headerlink" title="一个匪夷所思的需求"></a>一个匪夷所思的需求</h1><p>有时候我们需要在 docker container 里面运行一个 docker container（虽然都是运行在宿主机的 docker daemon 里的），这个其实使用 <code>-v /var/run/docker.sock:/var/run/docker.sock</code> 就能做到了。本文的重点是下面这种情况：</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年05月05日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tag" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#docker" class='tag'>docker</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
         <a href="/2018/05/13/xunit-debug-assert/">
           <h3 class='post-head'>
             在 .Net Core 中使用 Xunit 进行单元测试的奇葩问题
@@ -303,9 +342,9 @@
              
   <a href="/tags/#Web 开发" class='tag'>Web 开发</a>
 
-  <a href="/tags/#Asp.Net" class='tag'>Asp.Net</a>
-
   <a href="/tags/#AspNetBoilerplate" class='tag'>AspNetBoilerplate</a>
+
+  <a href="/tags/#Asp.Net" class='tag'>Asp.Net</a>
 
 
           
@@ -437,49 +476,6 @@
         </div>
       </section>
     
-      <section>
-        <a href="/2018/03/25/nuxt-jest-snapshot/">
-          <h3 class='post-head'>
-            Nuxt+Jest 构建页面级的快照测试
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我最近的一个网站用到了 Vue 的 nuxtjs 框架，这个框架的<a href="https://nuxtjs.org/guide/development-tools" target="_blank" rel="noopener">示例</a> 中用的是 ava。很不巧，WebStorm 不支持 ava，所以我打算用 jest 来进行快照测试。在折腾的过程中，我发现了一种神奇的方法，可以 将 nuxt 的构建过程同测试框架完美配合起来，这样在进行快照测试的时候不需要配置 jest 的 babel， 只需要让 jest 来比较生成出的 html 即可。不过缺点就是只能进行页面级的快照测试，没法单独测试 某个组件的快照了。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年03月25日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#前端" class='tag'>前端</a>
-
-  <a href="/tags/#vue" class='tag'>vue</a>
-
-  <a href="/tags/#jest" class='tag'>jest</a>
-
-
-          
-        </div>
-      </section>
-    
   </div>
   <aside>
     
@@ -547,7 +543,7 @@
   <footer>
   <div class="copyright">
     <div>
-      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
     </div>
     <div>
       Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>

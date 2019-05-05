@@ -77,6 +77,49 @@
   <div class="posts-list">
     
       <section>
+        <a href="/2018/03/25/nuxt-jest-snapshot/">
+          <h3 class='post-head'>
+            Nuxt+Jest 构建页面级的快照测试
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我最近的一个网站用到了 Vue 的 nuxtjs 框架，这个框架的<a href="https://nuxtjs.org/guide/development-tools" target="_blank" rel="noopener">示例</a> 中用的是 ava。很不巧，WebStorm 不支持 ava，所以我打算用 jest 来进行快照测试。在折腾的过程中，我发现了一种神奇的方法，可以 将 nuxt 的构建过程同测试框架完美配合起来，这样在进行快照测试的时候不需要配置 jest 的 babel， 只需要让 jest 来比较生成出的 html 即可。不过缺点就是只能进行页面级的快照测试，没法单独测试 某个组件的快照了。</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年03月25日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#前端" class='tag'>前端</a>
+
+  <a href="/tags/#vue" class='tag'>vue</a>
+
+  <a href="/tags/#jest" class='tag'>jest</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
         <a href="/2017/05/12/wsl-bash.org/">
           <h3 class='post-head'>
             WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因
@@ -439,49 +482,6 @@
         </div>
       </section>
     
-      <section>
-        <a href="/2016/08/30/clang-windows.org/">
-          <h3 class='post-head'>
-            在 windows 下使用 clang（不需要重新编译）
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <ul>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016年08月30日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#emacs" class='tag'>emacs</a>
-
-  <a href="/tags/#LLVM" class='tag'>LLVM</a>
-
-  <a href="/tags/#clang" class='tag'>clang</a>
-
-
-          
-        </div>
-      </section>
-    
   </div>
   <aside>
     
@@ -551,7 +551,7 @@
   <footer>
   <div class="copyright">
     <div>
-      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+      &copy; 2019 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
     </div>
     <div>
       Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
