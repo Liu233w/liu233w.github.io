@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://liu233w.github.io/"/>
-  <updated>2019-05-05T13:24:35.828Z</updated>
+  <updated>2019-05-09T14:21:56.908Z</updated>
   <id>https://liu233w.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java 8 parallelStream 在大批量小任务上的性能陷阱</title>
+    <link href="https://liu233w.github.io/2019/05/09/java8-stream-parallel-short-task/"/>
+    <id>https://liu233w.github.io/2019/05/09/java8-stream-parallel-short-task/</id>
+    <published>2019-05-09T12:37:52.000Z</published>
+    <updated>2019-05-09T14:21:56.908Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;tl-dr&quot;&gt;&lt;a href=&quot;#tl-dr&quot; class=&quot;headerlink&quot; title=&quot;tl;dr&quot;&gt;&lt;/a&gt;tl;dr&lt;/h1&gt;&lt;p&gt;Java 8 的 parallelStream 在运行大量的短任务（短时间执行的任务）之后会变成单线程运行，这是
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="java" scheme="https://liu233w.github.io/tags/java/"/>
+    
+      <category term="并发编程" scheme="https://liu233w.github.io/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Mount volume to a docker container running in a docker container</title>
@@ -331,6 +359,32 @@
   </entry>
   
   <entry>
+    <title>SpaceShift 在实际使用中的问题</title>
+    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
+    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
+    <published>2017-05-11T16:00:00.000Z</published>
+    <updated>2018-03-25T14:48:19.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
+        
+      
+    
+    </summary>
+    
+      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
+    
+    
+      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>WSL(Windows Subsystem for Linux) 提示找不到某程序的可能原因</title>
     <link href="https://liu233w.github.io/2017/05/12/wsl-bash.org/"/>
     <id>https://liu233w.github.io/2017/05/12/wsl-bash.org/</id>
@@ -358,32 +412,6 @@ bash.exe&amp;quot;:
       <category term="windows" scheme="https://liu233w.github.io/tags/windows/"/>
     
       <category term="wsl" scheme="https://liu233w.github.io/tags/wsl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SpaceShift 在实际使用中的问题</title>
-    <link href="https://liu233w.github.io/2017/05/12/space-as-shift.org/"/>
-    <id>https://liu233w.github.io/2017/05/12/space-as-shift.org/</id>
-    <published>2017-05-11T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;几个月之前，我读到了一篇关于提高键盘上键位利用率的文章（虽然网址现在已经找不到 了）。上面提到可以将空格键和 shift 合体来使用。在单独按下空格的时候是空格键，空格 和其他功能键（比如字母和数字之类的）一起按的时候会起到 shift 键的功能。这样的话可
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="键盘" scheme="https://liu233w.github.io/tags/%E9%94%AE%E7%9B%98/"/>
     
   </entry>
   
@@ -566,38 +594,6 @@ bash.exe&amp;quot;:
       <category term="usb" scheme="https://liu233w.github.io/tags/usb/"/>
     
       <category term="ahk" scheme="https://liu233w.github.io/tags/ahk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在 spacemacs 生成 micro-state 的同时为每个命令生成对应的执行并进入 micro-state 的函数</title>
-    <link href="https://liu233w.github.io/2016/09/02/multiple-micro-state.org/"/>
-    <id>https://liu233w.github.io/2016/09/02/multiple-micro-state.org/</id>
-    <published>2016-09-01T16:00:00.000Z</published>
-    <updated>2018-03-25T14:48:19.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;需求&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;我的实现&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#sec-&quot;&gt;使用&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="blog" scheme="https://liu233w.github.io/categories/blog/"/>
-    
-    
-      <category term="emacs" scheme="https://liu233w.github.io/tags/emacs/"/>
-    
-      <category term="spacemacs" scheme="https://liu233w.github.io/tags/spacemacs/"/>
     
   </entry>
   

@@ -77,6 +77,47 @@
   <div class="posts-list">
     
       <section>
+        <a href="/2019/05/09/java8-stream-parallel-short-task/">
+          <h3 class='post-head'>
+            Java 8 parallelStream 在大批量小任务上的性能陷阱
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h1 id="tl-dr"><a href="#tl-dr" class="headerlink" title="tl;dr"></a>tl;dr</h1><p>Java 8 的 parallelStream 在运行大量的短任务（短时间执行的任务）之后会变成单线程运行，这是 parallelStream 自带的性能优化功能。但是在短任务和长任务交替执行时，这种优化会显著拖慢运行速度。</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2019年05月09日</time>
+          
+            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#java" class='tag'>java</a>
+
+  <a href="/tags/#并发编程" class='tag'>并发编程</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
         <a href="/2019/05/05/docker-in-docker-container-mount/">
           <h3 class='post-head'>
             Mount volume to a docker container running in a docker container
@@ -427,49 +468,6 @@
   <a href="/tags/#Asp.Net" class='tag'>Asp.Net</a>
 
   <a href="/tags/#Vue" class='tag'>Vue</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2018/03/25/switch-to-hexo/">
-          <h3 class='post-head'>
-            从 EGO 切换到 hexo
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我刚刚打算写一篇博文，结果发现我的 ego 坏了。回想起来我过去已经在这上面浪费了<br>太多的时间，干嘛不直接切换到更成熟的方案呢_(:3」∠)_。更何况相比于 org，我现在<br>markdown写的更多了。于是我花了两个小时把原先的博客转换到了hexo里面。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018年03月25日</time>
-          
-            | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-
-
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#emacs" class='tag'>emacs</a>
-
-  <a href="/tags/#前端" class='tag'>前端</a>
-
-  <a href="/tags/#python" class='tag'>python</a>
 
 
           
