@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>poj-2955 Brackets | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>poj-2955 Brackets</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年07月18日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/acm/">acm</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#acm" class='tag'>acm</a>
+
+
+          
+        </div>
+        <ul>
+<li><a href="#sec-">题目：</a></li>
+<li><a href="#sec-">代码：</a></li>
+<li><a href="#sec-">解析&amp;吐槽：</a></li>
+</ul>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：<a id="sec-"></a></h1><p class="verse">
+Brackets<br />
+Time Limit: 1000MS        Memory Limit: 65536K<br />
+Total Submissions: 5959        Accepted: 3178<br />
+<br />
+Description<br />
+<br />
+We give the following inductive definition of a “regular brackets” sequence:<br />
+<br />
+&#xa0;&#xa0;&#xa0;&#xa0;the empty sequence is a regular brackets sequence,<br />
+&#xa0;&#xa0;&#xa0;&#xa0;if s is a regular brackets sequence, then (s) and [s] are regular brackets sequences, and<br />
+&#xa0;&#xa0;&#xa0;&#xa0;if a and b are regular brackets sequences, then ab is a regular brackets sequence.<br />
+&#xa0;&#xa0;&#xa0;&#xa0;no other sequence is a regular brackets sequence<br />
+<br />
+For instance, all of the following character sequences are regular brackets sequences:<br />
+<br />
+&#xa0;&#xa0;&#xa0;&#xa0;(), [], (()), ()[], ()[()]<br />
+<br />
+while the following character sequences are not:<br />
+<br />
+&#xa0;&#xa0;&#xa0;&#xa0;(, ], )(, ([)], ([(]<br />
+<br />
+Given a brackets sequence of characters a1a2 … an, your goal is to find the length of the longest regular brackets sequence that is a subsequence of s. That is, you wish to find the largest m such that for indices i1, i2, …, im where 1 ≤ i1 < i2 < … < im ≤ n, ai1ai2 … aim is a regular brackets sequence.<br />
+<br />
+Given the initial sequence ([([]])], the longest regular brackets subsequence is [([])].<br />
+<br />
+Input<br />
+<br />
+The input test file will contain multiple test cases. Each input test case consists of a single line containing only the characters (, ), [, and ]; each input test will have length between 1 and 100, inclusive. The end-of-file is marked by a line containing the word “end” and should not be processed.<br />
+<br />
+Output<br />
+<br />
+For each input case, the program should print the length of the longest possible regular brackets subsequence on a single line.<br />
+<br />
+Sample Input<br />
+<br />
+((()))<br />
+()()()<br />
+([]])<br />
+)[)(<br />
+([][][)<br />
+end<br />
+<br />
+Sample Output<br />
+<br />
+6<br />
+6<br />
+4<br />
+0<br />
+6<br />
+</p>
+
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：<a id="sec-"></a></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// oj.cpp : 定义控制台应用程序的入口点。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;numeric&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="comment">//#include &lt;cstdio&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">string L;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">110</span>][<span class="number">110</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">getres</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= j)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (dp[i][j] != <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> dp[i][j];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> pipei = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (L[i] == <span class="string">&#x27;(&#x27;</span>&amp;&amp;L[j] == <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        pipei = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (L[i] == <span class="string">&#x27;[&#x27;</span>&amp;&amp;L[j] == <span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">        pipei = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    dp[i][j]=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pipei)</span><br><span class="line">        dp[i][j] = <span class="built_in">getres</span>(i + <span class="number">1</span>, j - <span class="number">1</span>) + <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = i;k &lt; j;++k)</span><br><span class="line">        dp[i][j] = <span class="built_in">max</span>(<span class="built_in">getres</span>(i, k) + <span class="built_in">getres</span>(k + <span class="number">1</span>, j), dp[i][j]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dp[i][j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; L&amp;&amp;L != <span class="string">&quot;end&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">-1</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(dp));</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt; <span class="built_in">getres</span>(<span class="number">0</span>, L.<span class="built_in">size</span>() - <span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="解析-amp-吐槽："><a href="#解析-amp-吐槽：" class="headerlink" title="解析&amp;吐槽："></a>解析&amp;吐槽：<a id="sec-"></a></h1><p>网上的题解大多都是递推解的，我这里贴上一个记忆化搜索的版本。</p>
+<p>经典的动态规划题目，设 <code>dp[i][j]</code> 为 i、j 之间最多的配对括号数，递推分两种情况：</p>
+<ol>
+<li> L[i]==L[j] :: 有可能因为 i、j 配对而多出来两个括号，因此是 <code>dp[i+1][j-1]+2</code> 。</li>
+<li> L[i]!=L[j] :: 枚举所有的字母，将当前区间断成两个子区间，找到两个子区间相加最大的情况。</li>
+</ol>
+<p>坑点有二：</p>
+<ol>
+<li> 即使 <code>L[i]==L[j]</code> ，也有可能是把当前区间断开取子区间可以得到最优解。因此即使相等，也 必须枚举断开区间的情况。</li>
+<li> 一定要注意第二种情况里面递推的区间，我这里面的 k 要从 i 枚举到 j-1。因为如果 k 取 i， 子区间就是单独的 i 和排除 i 剩下的区间；取 j-1 时是单独的 j 和排除 j 的子区间。 我一开始做的时候就是因为把枚举区间写成了从 i+1 到 j-1 而狂 wa。</li>
+</ol>
+<p>关于题目也是有一些槽点，尽管题目一开始说只有配对的括号里的所有括号也是配对的时候这对括号 才是配对的，但是最后又说可以“任选”子序列使得子序列的所有括号都是配对的，也就是说子序列 不一定非得连续。总而言之只需要找到配对的括号，计算它们的数量即可，不需要管括号里面的括号 是否配对。我感觉如果题目要求是里面的括号也要配对的话可以把函数的开头两句改成这样：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (i == j)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-2</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (i &gt; j)</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>不过我也不知道这样到底对不对，毕竟没试过_(:зゝ∠)_</p>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-amp-%E5%90%90%E6%A7%BD%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">解析&amp;吐槽：</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2016/07/18/poj-2955.org/";
+  var disqus_url = "https://liu233w.github.io/2016/07/18/poj-2955.org/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

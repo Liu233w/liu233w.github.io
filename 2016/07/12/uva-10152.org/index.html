@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>uva-10152 ShellSort | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>uva-10152 ShellSort</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年07月12日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/acm/">acm</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#acm" class='tag'>acm</a>
+
+
+          
+        </div>
+        <ul>
+<li><a href="#sec-">题目：</a></li>
+<li><a href="#sec-">代码：</a></li>
+<li><a href="#sec-">解析&amp;吐槽：</a></li>
+</ul>
+<h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：<a id="sec-"></a></h1><p class="verse">
+10152 - ShellSort<br />
+Time limit: 3.000 seconds<br />
+</p>
+
+<div class="HTML">
+<object classid="clsid:CA8A9780-280D-11CF-A24D-444553540000" width="1000" height="1200" border="0"> <param name="\_Version" value="65539"> <param name="\_ExtentX" value="20108"> <param name="\_ExtentY" value="10866"> <param name="\_StockProps" value="0"> <param name="SRC" value="pdf/test.pdf"> <object data="<https://uva.onlinejudge.org/external/101/10152.pdf>" type="application/pdf" width="1000" height="1200"> </object> </object>
+
+</div>
+
+<h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：<a id="sec-"></a></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">string L[<span class="number">10000</span>];</span><br><span class="line">string M[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    cin&gt;&gt;T;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">getline</span>(cin,L[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)</span><br><span class="line">            <span class="built_in">getline</span>(cin,L[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)</span><br><span class="line">            <span class="built_in">getline</span>(cin,M[i]);</span><br><span class="line"></span><br><span class="line">        set&lt;string&gt; have;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> pL=n<span class="number">-1</span>,pM=n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(pL &gt;=<span class="number">0</span> &amp;&amp;pM &gt;= <span class="number">0</span> &amp;&amp; have.<span class="built_in">find</span>(M[pM]) == have.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(L[pL]==M[pM])</span><br><span class="line">            &#123;</span><br><span class="line">                --pL;</span><br><span class="line">                --pM;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                have.<span class="built_in">insert</span>(L[pL]);</span><br><span class="line">                --pL;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(pM&gt;=<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; M[pM--]&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        cout &lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="解析-amp-吐槽："><a href="#解析-amp-吐槽：" class="headerlink" title="解析&amp;吐槽："></a>解析&amp;吐槽：<a id="sec-"></a></h1><p>一群乌龟叠成一叠，每一只都有一个不同的名字。现在要把这些乌龟排成指定的顺序，排序方式是固定 的：从中选出一只乌龟，让它爬到最上面。问选出乌龟的顺序是怎么样的。</p>
+<p>分析一下排序的方式，我们可以发现如下规律：</p>
+<ol>
+<li> 起始顺序和终止顺序中，最底下的乌龟如果顺序不变，就可以不予考虑</li>
+<li> 只要有乌龟从下面爬上来，这只乌龟的目标位置上方的乌龟即使顺序不变， 稍后也必须要向上爬，因为下面的乌龟只能爬到最上面，这只乌龟必须要向上爬才能到达自己原来的位置。</li>
+</ol>
+<p>因此我们只需要从下向上找，设置两个指针来表示我们目前在起始顺序和终止顺序中处理的乌龟。 如果当前的乌龟相同，就将两个指针同时上移；每找到一只在起始顺序中出现，但是终止顺序中没有的 乌龟，就把它放进一个 set 里面，同时起始顺序的指针上移，终止顺序的指针不变。直到找到一个 在终止顺序中出现在 set 里面的乌龟——说明这只乌龟是从下面爬上来的最靠下的乌龟。这时候它 上面的所有乌龟都是必须要重排顺序的（见规律 2），而它下面的乌龟则不需要排序，因为抽出所有 在 set 中的乌龟之后，下面的乌龟和终止顺序的乌龟顺序是一样的。因此我们只需要按照从下往上的 顺序输出它上面的所有乌龟即可。</p>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">代码：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90-amp-%E5%90%90%E6%A7%BD%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">解析&amp;吐槽：</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2016/07/12/uva-10152.org/";
+  var disqus_url = "https://liu233w.github.io/2016/07/12/uva-10152.org/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

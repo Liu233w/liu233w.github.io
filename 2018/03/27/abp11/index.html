@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>在 ABP 2.3 和 Vue 单页应用中的踩坑总结 | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>在 ABP 2.3 和 Vue 单页应用中的踩坑总结</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2018年03月27日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#Web%20%E5%BC%80%E5%8F%91" class='tag'>Web 开发</a>
+
+  <a href="/tags/#Asp.Net" class='tag'>Asp.Net</a>
+
+  <a href="/tags/#Vue" class='tag'>Vue</a>
+
+
+          
+        </div>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>离 <a target="_blank" rel="noopener" href="http://acm.nwpu.edu.cn/">http://acm.nwpu.edu.cn</a> 开发结束已经过去半年多了，我最近也放弃了考研的打算，现在也算是有空写博客了_(:3」∠)_。我就在这一篇博文中总结一下之前踩过的坑。注意，这篇博文中的后端技术仅限于 Asp.Net Core 1.1 及 AspNetBoilerplate 2.3.0。我不保证这里的解决方案在现在的 .net core 2.0 和 ABP 3.X.X 里还能一样工作。另外，直接写在ABP、VUE文档里或者用Google能直接查到的解决方案我也是懒得在这里再写一遍的。</p>
+<p>这个网站是一个前后端完全分离的应用，后端用 ABP 来提供 api 供前端调用；前端是用 vue 编写的单页应用，在构建过程中会直接生成出目标 html 和 js，放进 .net core 的 <code>wwwroot</code> 中。在部署环境中由后端来提供前端的静态文件。</p>
+<h1 id="后端ABP及ASP-NET-CORE相关"><a href="#后端ABP及ASP-NET-CORE相关" class="headerlink" title="后端ABP及ASP.NET CORE相关"></a>后端ABP及ASP.NET CORE相关</h1><h2 id="把-Service-的注释文档放进-Swagger-UI-中"><a href="#把-Service-的注释文档放进-Swagger-UI-中" class="headerlink" title="把 Service 的注释文档放进 Swagger UI 中"></a>把 Service 的注释文档放进 Swagger UI 中</h2><p>默认情况下 Abp 生成的 swagger 里面只有Service 的方法名，没有文档。我们可以把Service 方法里 <code>summary</code> tag的里面的注释输出成 swagger 的文档。效果是这样的：<br><img src="1.png"><br>会输出成：<br><img src="2.png"></p>
+<h3 id="第一步：输出文档"><a href="#第一步：输出文档" class="headerlink" title="第一步：输出文档"></a>第一步：输出文档</h3><p>直接修改业务层 <code>XXX.Application</code> 的属性，生成 XML 文档：<br><img src="3.png"></p>
+<h3 id="第二步：展示文档"><a href="#第二步：展示文档" class="headerlink" title="第二步：展示文档"></a>第二步：展示文档</h3><p>修改 <code>XXX.Web.Host/Startup/Startup.cs</code> 文件，加上两行代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.PlatformAbstractions;</span><br></pre></td></tr></table></figure>
+<p>找到同一个文件的 <code>services.AddSwaggerGen</code> 那一行，在配置函数里加上</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">if</span> (!DEBUG)</span></span><br><span class="line"><span class="comment">//Set the comments path for the swagger json and ui.</span></span><br><span class="line"><span class="keyword">var</span> basePath = PlatformServices.Default.Application.ApplicationBasePath;</span><br><span class="line"><span class="keyword">var</span> docPath = Path.Combine(basePath, <span class="string">&quot;XXX.Application.xml&quot;</span>);</span><br><span class="line">options.IncludeXmlComments(docPath);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>这里的 docPath 是生成的文档文件的目录。我的设定是在 production 模式下生成文档，所以这里直接定位了build出来的文档的位置。</p>
+<h2 id="将-authorization-token-放进-cookie-中"><a href="#将-authorization-token-放进-cookie-中" class="headerlink" title="将 authorization token 放进 cookie 中"></a>将 authorization token 放进 cookie 中</h2><p>一开始我们的后端API是遵照 rest 标准的。只把租户ID和Authorization Token放进http请求的header里面。后来发现这样做还不行。因为这个网站会对读取文件有权限控制，而浏览器在下载诸如图片之类的文件的时候（用img标签里的请求）不会自动在header里面加上。所以必须把这个放进cookie里面。不过我没有在ABP的文档里找到“从Cookie里面读取Authorization Token”之类的东西。所以我写了一个中间件从 Cookie 里面读取 Authorization 字段，放进 header 里面。</p>
+<p>另外，对于租户ID而言，ABP会直接读取 Cookie 或者 header 中的 <code>Abp.TenantId</code> 作为租户id，所以这个是不需要用中间件处理的。</p>
+<p>中间件代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Http;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">AcmSignup.Identity</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 如果 header 中没有 authorization，就从cookie中取到并放进header中</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CookieAuthMiddleware</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">const</span> <span class="built_in">string</span> CookieAuthKey = <span class="string">&quot;OAuthToken&quot;</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">const</span> <span class="built_in">string</span> AuthorizationStart = <span class="string">&quot;Bearer &quot;</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> RequestDelegate _next;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">CookieAuthMiddleware</span>(<span class="params">RequestDelegate next</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (next == <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> ArgumentNullException(<span class="keyword">nameof</span>(next));</span><br><span class="line">            &#125;</span><br><span class="line">            _next = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Invoke</span>(<span class="params">HttpContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">string</span> token;</span><br><span class="line">            <span class="keyword">if</span> (context.Request.Cookies.TryGetValue(CookieAuthKey, <span class="keyword">out</span> token)</span><br><span class="line">                &amp;&amp; !context.Request.Headers.ContainsKey(<span class="string">&quot;Authorization&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                context.Request.Headers.Add(<span class="string">&quot;Authorization&quot;</span>, AuthorizationStart + token);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">await</span> _next(context);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>添加中间件：<br>在 <code>Startup.cs</code> 的 <code>Configure</code> 方法中加上一句 <code>app.UseMiddleware&lt;CookieAuthMiddleware&gt;();</code> 。</p>
+<p>注意，这一条必须写在 <code>app.UseAbp()</code> 前面。</p>
+<h2 id="在-Net-Core-的-XUnit-测试框架中跳过部分测试"><a href="#在-Net-Core-的-XUnit-测试框架中跳过部分测试" class="headerlink" title="在 .Net Core 的 XUnit 测试框架中跳过部分测试"></a>在 .Net Core 的 XUnit 测试框架中跳过部分测试</h2><p>我们使用了持续集成工具来运行单元测试。在我们的代码中，有一部分测试用例运行耗时比较长，并且不常改变。我们不需要在每次跑测试的时候都运行这些测试用例，又不想把这些用例删掉或注释掉，就可以用下面的方法来解决：</p>
+<p>首先增加给测试用例增加Category：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Fact</span>]</span><br><span class="line">[<span class="meta">Trait(<span class="meta-string">&quot;Category&quot;</span>, <span class="meta-string">&quot;NetworkBased&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">Trait(<span class="meta-string">&quot;Category&quot;</span>, <span class="meta-string">&quot;Slow&quot;</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">async</span> Task GetIcpcInformationStreamAsync_应该能获取到字符流()</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>然后在 travis-ci 的配置文件中把运行测试的命令从 <code>dotnet test</code> 改成 <code>dotnet test --filter Category!=Slow</code>。</p>
+<p>这样，在 travis-ci 测试的时候不会运行在 <code>Slow</code> Category 中的测试用例。而我们自己执行的时候仍然可以直接用 <code>dotnet test</code> 来执行所有测试用例。</p>
+<h2 id="将用户与租户解绑"><a href="#将用户与租户解绑" class="headerlink" title="将用户与租户解绑"></a>将用户与租户解绑</h2><p>我们的项目中有一个需求，就是可以将同一个用户用在多个租户中。即网站中存在多个数据独立的租户，但用户必须独立于租户存在。也就是说，同一个用户可以在租户之间切换，框架在筛选数据时只根据header或者Cookie中的租户id来判断租户。而ABP默认的机制中，用户是处于租户内的，ABP会直接通过Authorization Token找出用户，然后根据用户的数据选出租户，这不是我们需要的。</p>
+<p>在这方面，我做了比较多的修改，我刚刚查了一下git的提交记录，感觉要全整理出来还要花一些时间，所以这里就拖到以后再补充吧，先放上一些比较好总结的部分。</p>
+<h3 id="重载-session：-永远在-header-或者-Cookie-中获取租户信息"><a href="#重载-session：-永远在-header-或者-Cookie-中获取租户信息" class="headerlink" title="重载 session： 永远在 header 或者 Cookie 中获取租户信息"></a>重载 session： 永远在 header 或者 Cookie 中获取租户信息</h3><p><code>AbpSession</code> 原先的行为并不是这样（我也忘了原先的行为是啥了，大家感兴趣的话可以自己去查ABP的源码）。我们可以继承一下原来的AbpSession，修改一下获取租户ID的行为，然后用依赖注入把新的ABPSession弄进去。</p>
+<p><code>AcmSignupSession.cs</code></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Abp.Configuration.Startup;</span><br><span class="line"><span class="keyword">using</span> Abp.MultiTenancy;</span><br><span class="line"><span class="keyword">using</span> Abp.Runtime;</span><br><span class="line"><span class="keyword">using</span> Abp.Runtime.Session;</span><br><span class="line"><span class="keyword">using</span> Castle.Core.Logging;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">AcmSignup.Authorization</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AcmSignupSession</span> : <span class="title">ClaimsAbpSession</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">AcmSignupSession</span>(<span class="params">IPrincipalAccessor principalAccessor, IMultiTenancyConfig multiTenancy, ITenantResolver tenantResolver, IAmbientScopeProvider&lt;SessionOverride&gt; sessionOverrideScopeProvider</span>) </span></span><br><span class="line"><span class="function">            : <span class="title">base</span>(<span class="params">principalAccessor, multiTenancy, tenantResolver, sessionOverrideScopeProvider</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">override</span> <span class="built_in">int</span>? TenantId</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">get</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (OverridedValue != <span class="literal">null</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> OverridedValue.TenantId;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 永远从 Header 中获取租户信息</span></span><br><span class="line">                    <span class="keyword">return</span> TenantResolver.ResolveTenantId();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>XXXCoreModule.cs</code> 的 <code>PreInitialize</code> 里面加上这一段</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注入自己的 Session</span></span><br><span class="line">IocManager.Register&lt;IAbpSession, AcmSignupSession&gt;(DependencyLifeStyle.Singleton);</span><br></pre></td></tr></table></figure>
+
+<h3 id="覆写-Net-Core-中的-UserManager-相关的代码，以取消租户绑定"><a href="#覆写-Net-Core-中的-UserManager-相关的代码，以取消租户绑定" class="headerlink" title="覆写 Net Core 中的 UserManager 相关的代码，以取消租户绑定"></a>覆写 Net Core 中的 UserManager 相关的代码，以取消租户绑定</h3><p>UserManager 是 .net core 里面的，原有的 UserManager 只会在当前租户中获取数据，需要在外面包裹一层 UnitOfWork 的 using 来将租户 id 设为空。</p>
+<p>跟 Session 一样，必须继承一下这个类，覆盖一些方法，然后用依赖注入把这个搞进去。不过在ABP默认的模板中，已经有项目自己的 UserManager 了，可以直接改。</p>
+<p>例如：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">UnitOfWork</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">async</span> Task&lt;User&gt; <span class="title">FindByEmailAsync</span>(<span class="params"><span class="built_in">string</span> email</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> (_unitOfWorkManager.Current.SetTenantId(<span class="literal">null</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> <span class="keyword">base</span>.FindByEmailAsync(email);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这一类的都要改成这样。并且类似于 <code>GetGrantedPermissionsAsync</code> 之类的方法还要标记为 Obsolete 的。</p>
+<p>我写了一个 <a target="_blank" rel="noopener" href="https://github.com/Liu233w/my-scripts/blob/master/override-method.ahk">ahk 脚本</a>来生成所有可以重载的方法，适用于装了 Resharper 的 visual studio。只要启动脚本，定位到派生类的body里，然后狂按 f1 就可以了。</p>
+<h2 id="魔改-swagger，添加字段"><a href="#魔改-swagger，添加字段" class="headerlink" title="魔改 swagger，添加字段"></a>魔改 swagger，添加字段</h2><p>我们需要直接在 swagger 里面添加 Authorization 和租户ID，填入的内容会被自动放进 header 里面，这样就能把 swagger 当临时的后台用了，效果是这样的:</p>
+<p><img src="4.png"></p>
+<p>这种效果可以通过添加 <code>IOperationFilter</code> 来解决。首先在 XXX.Web.Core 里面加上一个 <code>AuthorizationHeaderParameterOperationFilter.cs</code>：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.AspNetCore.Mvc.Authorization;</span><br><span class="line"><span class="keyword">using</span> Swashbuckle.AspNetCore.Swagger;</span><br><span class="line"><span class="keyword">using</span> Swashbuckle.AspNetCore.SwaggerGen;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">AcmSignup.Configuration</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AuthorizationHeaderParameterOperationFilter</span> : <span class="title">IOperationFilter</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Apply</span>(<span class="params">Operation operation, OperationFilterContext context</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (operation.Parameters == <span class="literal">null</span>)</span><br><span class="line">                operation.Parameters = <span class="keyword">new</span> List&lt;IParameter&gt;();</span><br><span class="line">            operation.Parameters.Add(<span class="keyword">new</span> NonBodyParameter</span><br><span class="line">            &#123;</span><br><span class="line">                Name = <span class="string">&quot;Authorization&quot;</span>,</span><br><span class="line">                In = <span class="string">&quot;header&quot;</span>,</span><br><span class="line">                Description = <span class="string">&quot;access token&quot;</span>,</span><br><span class="line">                Required = <span class="literal">false</span>,</span><br><span class="line">                Type = <span class="string">&quot;string&quot;</span></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            operation.Parameters.Add(<span class="keyword">new</span> NonBodyParameter</span><br><span class="line">            &#123;</span><br><span class="line">                Name = <span class="string">&quot;Abp.TenantId&quot;</span>,</span><br><span class="line">                In = <span class="string">&quot;header&quot;</span>,</span><br><span class="line">                Description = <span class="string">&quot;租户编号，可以不填&quot;</span>,</span><br><span class="line">                Required = <span class="literal">false</span>,</span><br><span class="line">                Type = <span class="string">&quot;string&quot;</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>Startup.cs</code> 里面找到 <code>services.AddSwaggerGen</code>，加上一行 <code>options.OperationFilter&lt;AuthorizationHeaderParameterOperationFilter&gt;();</code>。现在是这样的：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swagger - Enable this line and the related lines in Configure method to enable swagger UI</span></span><br><span class="line">services.AddSwaggerGen(options =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    options.SwaggerDoc(<span class="string">&quot;v1&quot;</span>, <span class="keyword">new</span> Info &#123; Title = <span class="string">&quot;AcmSignup API&quot;</span>, Version = <span class="string">&quot;v1&quot;</span> &#125;);</span><br><span class="line">    options.DocInclusionPredicate((docName, description) =&gt; <span class="literal">true</span>);</span><br><span class="line">    options.OperationFilter&lt;AuthorizationHeaderParameterOperationFilter&gt;();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><p>这一部分主要是讨论如何将 ABP 同 Vue 结合在一起。</p>
+<p>（我刚刚发现官网上已经提供了 ABP+VUE 的模板，看来我已经不需要写这一部分了）</p>
+<h1 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h1><h2 id="用-travis-ci-同时测试-javascript-和-c"><a href="#用-travis-ci-同时测试-javascript-和-c" class="headerlink" title="用 travis-ci 同时测试 javascript 和 c#"></a>用 travis-ci 同时测试 javascript 和 <code>c#</code></h2><p>本项目的前后端是放在同一个 git repo 中的，要测试的话需要使用 <code>matrix</code> 来分离前后端的项目。</p>
+<p>.travis.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">matrix:</span></span><br><span class="line">  <span class="attr">include:</span></span><br><span class="line">    <span class="bullet">-</span> </span><br><span class="line">      <span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line">      <span class="attr">node_js:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;node&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">cache:</span></span><br><span class="line">        <span class="attr">directories:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">frontend/node_modules</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">install:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cd</span> <span class="string">frontend</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">rm</span> <span class="string">.npmrc</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">script:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">lint</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">build</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">      <span class="attr">language:</span> <span class="string">csharp</span></span><br><span class="line">      <span class="attr">solution:</span> <span class="string">./backend/AcmSignup.sln</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">mono:</span> <span class="string">none</span></span><br><span class="line">      <span class="attr">dotnet:</span> <span class="number">1.1</span><span class="number">.0</span></span><br><span class="line">      <span class="attr">dist:</span> <span class="string">trusty</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">install:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cd</span> <span class="string">backend/test/AcmSignup.Tests</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">dotnet</span> <span class="string">restore</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">script:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">dotnet</span> <span class="string">test</span> <span class="string">--filter</span> <span class="string">Category!=Slow</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自动部署前后端"><a href="#自动部署前后端" class="headerlink" title="自动部署前后端"></a>自动部署前后端</h2><p>我还写了一个脚本，可以在 GitHub 上新建一个 release 的时候自动编译前后端并将结果放进 release 中。这样在服务器上部署的时候直接解压压缩包然后重启服务就好了。</p>
+<p>这里的代码需要改一下才能在别的项目上运行。</p>
+<p>.travis.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">test</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">deploy</span></span><br><span class="line">    <span class="attr">if:</span> <span class="string">tag</span> <span class="string">=~</span> <span class="string">^v</span></span><br><span class="line"></span><br><span class="line"><span class="attr">matrix:</span></span><br><span class="line">  <span class="attr">include:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">stage:</span> <span class="string">test</span></span><br><span class="line">      <span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line">      <span class="attr">node_js:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;node&quot;</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">cache:</span></span><br><span class="line">        <span class="attr">directories:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">frontend/node_modules</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">install:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cd</span> <span class="string">frontend</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">rm</span> <span class="string">.npmrc</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">script:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">lint</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">build</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">      <span class="attr">language:</span> <span class="string">csharp</span></span><br><span class="line">      <span class="attr">solution:</span> <span class="string">./backend/AcmSignup.sln</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">mono:</span> <span class="string">none</span></span><br><span class="line">      <span class="attr">dotnet:</span> <span class="number">1.1</span><span class="number">.0</span></span><br><span class="line">      <span class="attr">dist:</span> <span class="string">trusty</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">install:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cd</span> <span class="string">backend/test/AcmSignup.Tests</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">dotnet</span> <span class="string">restore</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">script:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">dotnet</span> <span class="string">test</span> <span class="string">--filter</span> <span class="string">Category!=Slow</span></span><br><span class="line"></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">      <span class="attr">sudo:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">language:</span> <span class="string">csharp</span></span><br><span class="line">      <span class="attr">mono:</span> <span class="string">none</span></span><br><span class="line">      <span class="attr">dotnet:</span> <span class="number">1.1</span><span class="number">.0</span></span><br><span class="line">      <span class="attr">dist:</span> <span class="string">trusty</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">before_install:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">sudo</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="string">-y</span> <span class="string">nodejs</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">cache:</span></span><br><span class="line">        <span class="attr">directories:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">frontend/node_modules</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">install:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">rm</span> <span class="string">frontend/.npmrc</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">script:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cd</span> <span class="string">tools</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">sh</span> <span class="string">deploy-all.sh</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cd</span> <span class="string">..</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">before_deploy:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">zip</span> <span class="string">-r</span> <span class="string">dist.zip</span> <span class="string">dist/*</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">zip</span> <span class="string">-r</span> <span class="string">wwwroot.zip</span> <span class="string">dist/acmsignup/wwwroot/*</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">deploy:</span></span><br><span class="line">        <span class="attr">provider:</span> <span class="string">releases</span></span><br><span class="line">        <span class="attr">api_key:</span> <span class="string">&quot;你的 TOKEN&quot;</span></span><br><span class="line">        <span class="attr">file:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">dist.zip</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">wwwroot.zip</span></span><br><span class="line">        <span class="attr">skip_cleanup:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">on:</span></span><br><span class="line"><span class="attr">tags:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>tools/deploy-all.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ../dist</span><br><span class="line">sh ./build-frontend.sh</span><br><span class="line">sh ./build-backend.sh</span><br></pre></td></tr></table></figure>
+
+<p>tools/build-frontend.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ../dist/acmsignup/wwwroot/index.html ../dist/acmsignup/wwwroot/favicon.ico ../dist/acmsignup/wwwroot/static</span><br><span class="line"><span class="built_in">cd</span> ../frontend</span><br><span class="line">npm install</span><br><span class="line">npm run build</span><br><span class="line"><span class="built_in">cd</span> dist</span><br><span class="line">mkdir -p ../../dist/acmsignup/wwwroot</span><br><span class="line">find . ! -<span class="built_in">type</span> d | grep -v <span class="string">&#x27;.*.map$&#x27;</span> | xargs tar -cf - | tar -C ../../dist/acmsignup/wwwroot -xvf -</span><br></pre></td></tr></table></figure>
+
+<p>tools/build-backend.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">find ../dist/acmsignup/ | egrep -v <span class="string">&#x27;^../dist/acmsignup/$|^../dist/acmsignup/wwwroot&#x27;</span> | xargs rm -rf</span><br><span class="line">dotnet restore ../backend/src/AcmSignup.Web.Host/</span><br><span class="line">dotnet publish -f netcoreapp1.1 -c Release ../backend/src/AcmSignup.Web.Host/</span><br><span class="line">cp -r ../backend/src/AcmSignup.Web.Host/bin/Release/netcoreapp1.1/publish/* ../dist/acmsignup</span><br></pre></td></tr></table></figure>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E7%AB%AFABP%E5%8F%8AASP-NET-CORE%E7%9B%B8%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">后端ABP及ASP.NET CORE相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%8A-Service-%E7%9A%84%E6%B3%A8%E9%87%8A%E6%96%87%E6%A1%A3%E6%94%BE%E8%BF%9B-Swagger-UI-%E4%B8%AD"><span class="toc-number">2.1.</span> <span class="toc-text">把 Service 的注释文档放进 Swagger UI 中</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E6%A1%A3"><span class="toc-number">2.1.1.</span> <span class="toc-text">第一步：输出文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B1%95%E7%A4%BA%E6%96%87%E6%A1%A3"><span class="toc-number">2.1.2.</span> <span class="toc-text">第二步：展示文档</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86-authorization-token-%E6%94%BE%E8%BF%9B-cookie-%E4%B8%AD"><span class="toc-number">2.2.</span> <span class="toc-text">将 authorization token 放进 cookie 中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-Net-Core-%E7%9A%84-XUnit-%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6%E4%B8%AD%E8%B7%B3%E8%BF%87%E9%83%A8%E5%88%86%E6%B5%8B%E8%AF%95"><span class="toc-number">2.3.</span> <span class="toc-text">在 .Net Core 的 XUnit 测试框架中跳过部分测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E7%94%A8%E6%88%B7%E4%B8%8E%E7%A7%9F%E6%88%B7%E8%A7%A3%E7%BB%91"><span class="toc-number">2.4.</span> <span class="toc-text">将用户与租户解绑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD-session%EF%BC%9A-%E6%B0%B8%E8%BF%9C%E5%9C%A8-header-%E6%88%96%E8%80%85-Cookie-%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%A7%9F%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.1.</span> <span class="toc-text">重载 session： 永远在 header 或者 Cookie 中获取租户信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A6%86%E5%86%99-Net-Core-%E4%B8%AD%E7%9A%84-UserManager-%E7%9B%B8%E5%85%B3%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%BB%A5%E5%8F%96%E6%B6%88%E7%A7%9F%E6%88%B7%E7%BB%91%E5%AE%9A"><span class="toc-number">2.4.2.</span> <span class="toc-text">覆写 Net Core 中的 UserManager 相关的代码，以取消租户绑定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AD%94%E6%94%B9-swagger%EF%BC%8C%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5"><span class="toc-number">2.5.</span> <span class="toc-text">魔改 swagger，添加字段</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">前端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="toc-number">4.</span> <span class="toc-text">持续集成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8-travis-ci-%E5%90%8C%E6%97%B6%E6%B5%8B%E8%AF%95-javascript-%E5%92%8C-c"><span class="toc-number">4.1.</span> <span class="toc-text">用 travis-ci 同时测试 javascript 和 c#</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%89%8D%E5%90%8E%E7%AB%AF"><span class="toc-number">4.2.</span> <span class="toc-text">自动部署前后端</span></a></li></ol></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2018/03/27/abp11/";
+  var disqus_url = "https://liu233w.github.io/2018/03/27/abp11/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

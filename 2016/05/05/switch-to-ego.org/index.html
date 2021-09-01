@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>成功将站点生成器转换为 EGO | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>成功将站点生成器转换为 EGO</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年05月05日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#emacs" class='tag'>emacs</a>
+
+  <a href="/tags/#%E5%89%8D%E7%AB%AF" class='tag'>前端</a>
+
+  <a href="/tags/#ego" class='tag'>ego</a>
+
+  <a href="/tags/#git" class='tag'>git</a>
+
+
+          
+        </div>
+        <ul>
+<li><a href="#sec-">以前的文章内容</a></li>
+<li><a href="#sec-">16 年 5 月 9 日的修改</a></li>
+<li><a href="#sec-">16 年 6 月 11 日修改</a></li>
+</ul>
+<h1 id="以前的文章内容"><a href="#以前的文章内容" class="headerlink" title="以前的文章内容"></a>以前的文章内容<a id="sec-"></a></h1><p>把生成器换成 ego 了，人性化多了，比 org-page 不知道高到哪里去了。我更换生成器的起因 是博客突然没办法正常生成了，我以为是 org-page 和 spacemacs 起了冲突，结果后来发现并不是 ，是我的 git 在 emacs 上和 cmd 上的配置文件变得不是同一个了（我也不知道是怎么回事）， 于是每次用 emacs commit 的时候都会出错（要求用户指定用户名和邮箱），现在问题解决了， TMD 又浪费了一晚上。现在</p>
+<p>我把配置文件中的 org-page layer 删掉了，改成了 githubblog layer。存放 ego 的配置文件。 另外，我找到了一个好东西：<a target="_blank" rel="noopener" href="http://elpa.popkit.org/">http://elpa.popkit.org/</a> 这是 melpa 的国内镜像，用它下插件 方便多了。但是在 spacemacs 上修改源列表就麻烦了。因为源列表是内嵌在 core 里面的，如果 修改的话就会破坏 git 的版本控制，那就只好手动 fork 源文件然后自己保持同步了，简直蛋疼。 如果把修改的代码放到 layer 里面的话，在安装插件的时候会出错，因为 layer 是在 core 之后 加载的，但是插件会在 layer 之前安装，所以没什么卵用。在这里记录一下我的代码，缅怀我逝去 的半个小时</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">;;将 melpa 源替换成 popkit 源，便于国内使用</span></span><br><span class="line">(<span class="name">setq</span> package-archives</span><br><span class="line">      (<span class="name">delete-if</span> &#x27;(lambda (it) (string= (car it) <span class="string">&quot;melpa&quot;</span>)) package-archives))</span><br><span class="line">(<span class="name">add-to-list</span> &#x27;package-archives</span><br><span class="line">             &#x27;(<span class="string">&quot;popkit&quot;</span> . <span class="string">&quot;http://elpa.popkit.org/packages/&quot;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="16-年-5-月-9-日的修改"><a href="#16-年-5-月-9-日的修改" class="headerlink" title="16 年 5 月 9 日的修改"></a>16 年 5 月 9 日的修改<a id="sec-"></a></h1><p>终于实现了我想要的效果，现在 blog 和 acm 的 category 已经显示在导航栏上了。 在 github 上给作者提问之后才知道怎么做的_(:зゝ∠)_</p>
+<p>其实只需要在配置中加入如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">  (setf ego--category-config-alist</span><br><span class="line">      &#x27;((&quot;blog&quot;</span><br><span class="line">        :show-meta t</span><br><span class="line">        :show-comment t</span><br><span class="line">        :uri-generator ego--generate-uri</span><br><span class="line">        :uri-template &quot;/blog/%y/%m/%d/%t/&quot;</span><br><span class="line">        :sort-by :date     ;; how to sort the posts</span><br><span class="line">        ;; 生成 category 的目录，默认是 nil，我改成 t 了，不知道原来是什么效果</span><br><span class="line">        :category-index t)</span><br><span class="line">       (&quot;acm&quot;</span><br><span class="line">        :show-meta t</span><br><span class="line">        :show-comment t</span><br><span class="line">        :uri-generator ego--generate-uri</span><br><span class="line">        :uri-template &quot;/blog/%y/%m/%d/%t/&quot;</span><br><span class="line">        :sort-by :date     ;; how to sort the posts</span><br><span class="line">        :category-index t)</span><br><span class="line">       (&quot;index&quot;                         ;;底下的两个不能去掉，否则没法正常生成主页</span><br><span class="line">        :show-meta nil</span><br><span class="line">        :show-comment nil</span><br><span class="line">        :uri-generator ego--generate-uri</span><br><span class="line">        :uri-template &quot;/&quot;</span><br><span class="line">        :sort-by :date</span><br><span class="line">        :category-index nil)</span><br><span class="line">       (&quot;about&quot;</span><br><span class="line">        :show-meta nil</span><br><span class="line">        :show-comment nil</span><br><span class="line">        :uri-generator ego--generate-uri</span><br><span class="line">        :uri-template &quot;/about/&quot;</span><br><span class="line">        :sort-by :date</span><br><span class="line">        :category-index nil)</span><br><span class="line">       ))</span><br><span class="line"></span><br><span class="line">;; 以下是重点：控制哪些 category 显示在导航栏中</span><br><span class="line">(setf ego--category-show-list</span><br><span class="line">      &#x27;(&quot;blog&quot; &quot;acm&quot;))</span><br></pre></td></tr></table></figure>
+
+<p>现在还有一些可以改进的地方</p>
+<ul>
+<li>  使 category 在导航栏中的显示与其名称不同，比如把 blog 显示为“我的文章”</li>
+<li>  修改主题，现在的主题太难受了</li>
+<li>  使得 acm 和 blog 的 index 显示在主页上</li>
+</ul>
+<h1 id="16-年-6-月-11-日修改"><a href="#16-年-6-月-11-日修改" class="headerlink" title="16 年 6 月 11 日修改"></a>16 年 6 月 11 日修改<a id="sec-"></a></h1><p>emacs-china 现在已经正式提供了 elpa 源，清华大学也已经提供了分流，包安装已经变得方便多了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">;;清华大学的国内源：https://mirrors.tuna.tsinghua.edu.cn/help/elpa/</span><br><span class="line">(setq configuration-layer--elpa-archives</span><br><span class="line">    &#x27;((&quot;melpa-cn&quot; . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;)</span><br><span class="line">      (&quot;org-cn&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/org/&quot;)</span><br><span class="line">      (&quot;gnu-cn&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;)))</span><br></pre></td></tr></table></figure>
+
+<p>我在这个分流的地址上查到，如果想要修改 spacemacs 默认的源地址，需要在 user-init 中修改 configuration-layer–elpa-archives，spacemacs 提供了额外的一个变量 来保存源地址。现在已经不需要修改 spacemacs 的 core 了，所有的配置文件又保存到 同一个文件夹下了。</p>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A5%E5%89%8D%E7%9A%84%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9"><span class="toc-number">1.</span> <span class="toc-text">以前的文章内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-%E5%B9%B4-5-%E6%9C%88-9-%E6%97%A5%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="toc-number">2.</span> <span class="toc-text">16 年 5 月 9 日的修改</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-%E5%B9%B4-6-%E6%9C%88-11-%E6%97%A5%E4%BF%AE%E6%94%B9"><span class="toc-number">3.</span> <span class="toc-text">16 年 6 月 11 日修改</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2016/05/05/switch-to-ego.org/";
+  var disqus_url = "https://liu233w.github.io/2016/05/05/switch-to-ego.org/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

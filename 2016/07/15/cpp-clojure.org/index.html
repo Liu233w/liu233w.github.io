@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>用 C++11 的 lambda 实现简易闭包 | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>用 C++11 的 lambda 实现简易闭包</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年07月15日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#c++" class='tag'>c++</a>
+
+  <a href="/tags/#clojure" class='tag'>clojure</a>
+
+  <a href="/tags/#lambda" class='tag'>lambda</a>
+
+
+          
+        </div>
+        <ul>
+<li><a href="#sec-">原先的博文</a></li>
+<li><a href="#sec-">当天更新</a></li>
+</ul>
+<h1 id="原先的博文"><a href="#原先的博文" class="headerlink" title="原先的博文"></a>原先的博文<a id="sec-"></a></h1><p>今天突然想到可以用 lambda 实现一个类似函数式编程当中的累加器的东西，我首先想到的是如下的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> func = [](<span class="keyword">int</span> beg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [&amp;]() &#123;<span class="keyword">return</span> ++beg;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> f1=<span class="built_in">func</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="built_in">f1</span>() &lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;<span class="built_in">f1</span>()&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<p>但是这段代码输出的是乱码！因为 c++的 lambda 没有闭包功能，我们返回的函数只能保存捕获的值或 引用。这里我们传递给 func 函数的 beg 参数在它返回 lambda 之后就被销毁了，而它返回的函数会在 beg 被销毁之后调用。因此我们访问的 beg 就是未定义的内存了。</p>
+<p>那怎么解决这个问题呢？用指针保存！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> func = [](<span class="keyword">int</span> beg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> *a = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(beg);</span><br><span class="line">    <span class="keyword">return</span> [=]() &#123;<span class="keyword">return</span> ++*a;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> f1 = <span class="built_in">func</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="built_in">f1</span>() &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="built_in">f1</span>() &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>我们在 func 函数里面定义了一个指针，然后把指针按值传递给返回的 lambda（注意那个 <code>&amp;</code> 被改成了 <code>=</code> ）。这样保存的值就不会在 func 函数超出作用域之后被销毁了，可以在外部正常访问。 同时我们可以生成任意数量的累加器，比如 f2 f3 等等，每个累加器的初始值都可以是不同的， 而且相互独立。</p>
+<p>但是这种写法仍然有两个问题：</p>
+<ol>
+<li> 指针 a 没有办法被销毁，在函数结束后变成了野指针。这个问题我会在下文解决。</li>
+<li> 上个程序的输出是“2 1”，就好像先运行了 <code>*a==2</code> 的情况，后运行了 <code>*a==1</code> 的情况一样。 我不知道为什么会这样，但是如果把两个函数调用放到两个 cout 的语句中，输出就是“1 2”， 正常了。我把这个问题放到了<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/48510152"> 知乎</a> 上，希望有人可以给我解答。</li>
+</ol>
+<p>现在我们来解决野指针的问题，这是我的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> func = [](<span class="keyword">int</span> beg)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> *a = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(beg);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">make_pair</span>([=]() -&gt;<span class="keyword">int</span> &#123;<span class="keyword">return</span> ++*a;&#125;, shared_ptr&lt;<span class="keyword">int</span>&gt;(a));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> f1 = <span class="built_in">func</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; f1.<span class="built_in">first</span>() &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; f1.<span class="built_in">first</span>() &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们把指针放到了一个 shared_ptr 里面，然后把这个智能指针和函数打包到了一个 pair 里面。 func 函数返回了 pair，如果我们想要调用累加器函数，就必须要写成 <code>f1.first()</code> 了。现在， 指针的生命周期和 lambda 的生命周期绑定到了一起，如果我们复制了 lambda 函数，智能指针也会 一起被复制。只有在所有的 pair 被销毁之后（这时候也没法访问 lambda 函数了），指针才会被 销毁。</p>
+<p>我们可以把上一个代码包装一下，做成一个可以接受任意数量的参数的闭包。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> comma ,</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> clojure(arg, v, init_v, f) [] arg \</span></span><br><span class="line"><span class="meta">&#123;\</span></span><br><span class="line"><span class="meta">    struct str \</span></span><br><span class="line"><span class="meta">    v *s = new str init_v ; \</span></span><br><span class="line"><span class="meta">    return std::make_pair([=]()f, std::shared_ptr<span class="meta-string">&lt;str&gt;</span>(s)); \</span></span><br><span class="line"><span class="meta">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> func = <span class="built_in">clojure</span>((<span class="keyword">int</span> beg, <span class="keyword">int</span> end), &#123; <span class="keyword">int</span> a; <span class="keyword">int</span> b; &#125;,</span><br><span class="line">    &#123;beg comma end&#125;, &#123; <span class="built_in"><span class="keyword">return</span></span> (++s-&gt;a) + s-&gt;b; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> f1 = <span class="built_in">func</span>(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; f1.<span class="built_in">first</span>() &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">     &lt;&lt; f1.<span class="built_in">first</span>() &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>clojure 是一个宏（我承认我被 lisp 给玩坏了_(:зゝ∠)_）。我们把多个参数放到了一个 struct 里面，就可以保存多个变量了。 宏的参数：</p>
+<ul>
+<li>  <strong>第一个参数，arg:</strong> 生成的“累加器的生成器”的形参（当然不一定非得是累加器），不管有几个参数都 必须用一个括号包起来（没有参数就要一个空括号）。必须要写参数类型。</li>
+<li>  <strong>第二个参数，v:</strong> struct 的 body，要用大括号包起来。要写参数类型，参数之间用分号隔开。</li>
+<li>  <strong>第三个参数，init_v:</strong> 给 struct 赋值的时候依次赋给 body 里面各个变量的值，需要用大括号 包起来，多个参数时要在参数之间用关键字 comma 隔开。我这里用的是 c++11 里面 struct 的大括号赋值法，如果在 struct 里面加上函数把它变成类的话，貌似就没法这么赋值了。</li>
+<li>  <strong>第四个参数，f:</strong> 返回的 lambda 的函数体，如果需要声明此 lambda 的返回值的话，可以把箭头的 声明放在大括号前面。想要使用 struct 的变量，可以用 <code>s-&gt;v 中的变量名</code> 的方法来访问。</li>
+</ul>
+<p>接下来我们试一下指针是否会被销毁。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;stdafx.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> comma ,</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> clojure(arg, v, init_v, f) [] arg \</span></span><br><span class="line"><span class="meta">&#123;\</span></span><br><span class="line"><span class="meta">    struct str \</span></span><br><span class="line"><span class="meta">    v *s = new str init_v ; \</span></span><br><span class="line"><span class="meta">    return std::make_pair([=]()f, std::shared_ptr<span class="meta-string">&lt;str&gt;</span>(s)); \</span></span><br><span class="line"><span class="meta">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ~<span class="built_in">test</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;I&#x27;m dead.&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> func = <span class="built_in">clojure</span>((<span class="keyword">int</span> beg), &#123; <span class="keyword">int</span> a; test t; &#125;,</span><br><span class="line">        &#123;beg comma <span class="built_in">test</span>()&#125;, &#123; <span class="keyword">return</span> ++(s-&gt;a); &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> f1 = <span class="built_in">func</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; f1.<span class="built_in">first</span>() &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; f1.<span class="built_in">first</span>() &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段程序是在 visual studio 2015 上编译运行的，结果是：</p>
+<p class="verse">
+I'm dead.<br />
+2 1<br />
+I'm dead.<br />
+请按任意键继续. . .<br />
+</p>
+
+<p>可以看到确实是删掉了。啊嘞Σ(⊙▽⊙”a 怎么销毁了两次？这下我就不明白了。以后再研究吧_(:зゝ∠)_</p>
+<h1 id="当天更新"><a href="#当天更新" class="headerlink" title="当天更新"></a>当天更新<a id="sec-"></a></h1><p>输出 2 1 的原因我明白了，是求值顺序未定义，我居然忘了这么基础的知识点_(:зゝ∠)_。 对于如下的代码，一个表达式中各个值的求值顺序是未定义的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">cout &lt;&lt; ++i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; ++i &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>我的编译器上输出是 <code>2 2</code> 。因为标准没有规定对于这两个 i 是从左到右求值、从右到左求值还是 先全求值完再直接显示结果。</p>
+<p>至于显示销毁了两次的原因，第一次是因为我们在 func 函数中用 test 的默认构造函数生成了一个 test 并将它复制给了指针中的结构体里的 test。这个语句结束之后第一个生成的 test 就被销毁了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> func = <span class="built_in">clojure</span>((<span class="keyword">int</span> beg), &#123; <span class="keyword">int</span> a; test t; &#125;,</span><br><span class="line">    &#123;beg&#125;, &#123; <span class="keyword">return</span> ++(s-&gt;a); &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面的是修改版的 func，删去了第二行的 <code>comma test()</code> ，就略去了复制赋值的环节，只会在 new 对象的时候生成 test。现在 test 就只会销毁一次了。</p>
+<p>看来我对 c++掌握的还不够啊_(:зゝ∠)_</p>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E5%85%88%E7%9A%84%E5%8D%9A%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">原先的博文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BD%93%E5%A4%A9%E6%9B%B4%E6%96%B0"><span class="toc-number">2.</span> <span class="toc-text">当天更新</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2016/07/15/cpp-clojure.org/";
+  var disqus_url = "https://liu233w.github.io/2016/07/15/cpp-clojure.org/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>Spacemacs 通过选择性开启 pangu-spacing 加快打开大文件的速度 | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>Spacemacs 通过选择性开启 pangu-spacing 加快打开大文件的速度</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年07月24日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#emacs" class='tag'>emacs</a>
+
+  <a href="/tags/#spacemacs" class='tag'>spacemacs</a>
+
+
+          
+        </div>
+        <ul>
+<li><a href="#sec-">概述</a></li>
+<li><a href="#sec-">实验</a></li>
+<li><a href="#sec-">解决方法</a></li>
+</ul>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述<a id="sec-"></a></h1><p>spacemacs 的 Chinese layer 中 pangu-spacing 是默认全局开启的，这个 package 会严重拖慢 emacs 打开大文件或者在大文件中翻动页面的速度。如果使用类似 <a target="_blank" rel="noopener" href="https://github.com/zilongshanren/spacemacs-private/blob/develop/layers/zilongshanren-better-defaults/config.el#L132%5D%5D%0Ahttps://github.com/zilongshanren/spacemacs-private/blob/develop/layers/zilongshanren-better-defaults/config.el#L132">子龙山人的配置</a> 里面的在打开文件时检测大小并关闭行号和 pangu-spacing 的函数，在打开大文件的时候仍然 极其卡顿，因为 emacs 会先调用 pangu-spacing 添加空格的函数，然后再调用 <code>find-file-hook</code> 来关闭 pangu-spacing。</p>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验<a id="sec-"></a></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  (add-hook &#x27;find-file-hook &#x27;(lambda ()</span><br><span class="line">                             ;;模拟遇到大文件时关闭 pangu-spacing</span><br><span class="line">                             (pangu-spacing-mode -1)</span><br><span class="line">                             (message &quot;find-file-mode-hook&quot;)))</span><br><span class="line">(add-hook &#x27;pangu-spacing-mode-hook &#x27;(lambda () (message &quot;pangu-spacing-mode&quot;)))</span><br></pre></td></tr></table></figure>
+
+<p>message 中打开一个文件时的输出：</p>
+<p class="verse">
+find-file-mode-hook<br />
+pangu-spacing-mode [4 times]<br />
+</p>
+
+<p>虽然不知道为什么调用了好几次，但是 buffer 里面 pangu-spacing 确实是关闭的。 这么做在打开大文件时仍然极其卡顿。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法<a id="sec-"></a></h1><p>覆盖 spacemacs 对 pangu-spacing 的默认配置。默认使其关闭，只有当我们确定 buffer 很小的时候才 启动它。这个函数是我直接从 chinese-layer 里面复制的，只改动了一部分和加了一个 hook。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  ;; 多大的 buffer 才算是大 buffer，在 buffer-size 超过此大小之后会采取不同的策略</span><br><span class="line">;; 来提高运行效率</span><br><span class="line">(defvar *large-buffer-threshold* 300000</span><br><span class="line">  &quot;Buffer whose size beyond it will have a different behavior for the efficiency&quot;)</span><br><span class="line"></span><br><span class="line">(defun liu233w/init-pangu-spacing ()</span><br><span class="line">  &quot;覆盖 Chinese-layer 中的设置。默认关闭 pangu-spacing，只有在 buffer 比较小的时候才启动，</span><br><span class="line">如果是启动之后再关闭的话就开的太慢了。&quot;</span><br><span class="line">  (use-package pangu-spacing</span><br><span class="line">    :config</span><br><span class="line">    (global-pangu-spacing-mode -1)</span><br><span class="line">    (spacemacs|hide-lighter pangu-spacing-mode)</span><br><span class="line">    ;; Always insert `real&#x27; space in org-mode.</span><br><span class="line">    (add-hook &#x27;org-mode-hook</span><br><span class="line">              &#x27;(lambda ()</span><br><span class="line">                 (set (make-local-variable &#x27;pangu-spacing-real-insert-separtor) t)))</span><br><span class="line"></span><br><span class="line">    (defun liu233w/enable-pangu-spacing-when-buffer-not-large ()</span><br><span class="line">      &quot;when buffer is not large, turn on it&quot;</span><br><span class="line">      (when (&lt; (buffer-size) *large-buffer-threshold*)</span><br><span class="line">        (pangu-spacing-mode 1)))</span><br><span class="line"></span><br><span class="line">    (dolist (i &#x27;(prog-mode-hook text-mode-hook))</span><br><span class="line">      (add-hook i &#x27;liu233w/enable-pangu-spacing-when-buffer-not-large))</span><br><span class="line">    ))</span><br></pre></td></tr></table></figure>
+
+<p>这么做之后打开大文件比原来流畅多了。</p>
+<p>我原来试过把配置放进 <code>post-init-pangu-spacing</code> 里面，但是不成功，默认pangu-spacing还是 开启的， 只好直接覆盖函数了。附上我原来的配置，希望大家能帮我找一下哪里有问题_(:зゝ∠)_</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(defun liu233w/post-init-pangu-spacing ()</span><br><span class="line">  (with-eval-after-load &#x27;pangu-spacing-mode</span><br><span class="line">    (pangu-spacing-mode -1)</span><br><span class="line"></span><br><span class="line">    (defun liu233w/enable-pangu-spacing-when-buffer-not-large ()</span><br><span class="line">      &quot;when buffer is not large, turn on it&quot;</span><br><span class="line">      (when (&lt; (buffer-size) *large-buffer-threshold*)</span><br><span class="line">        (pangu-spacing-mode 1)))</span><br><span class="line"></span><br><span class="line">    (dolist (i &#x27;(prog-mode-hook text-mode-hook))</span><br><span class="line">      (add-hook i &#x27;liu233w/enable-pangu-spacing-when-buffer-not-large))))</span><br></pre></td></tr></table></figure>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.</span> <span class="toc-text">实验</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2016/07/24/pangu-spacing.org/";
+  var disqus_url = "https://liu233w.github.io/2016/07/24/pangu-spacing.org/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

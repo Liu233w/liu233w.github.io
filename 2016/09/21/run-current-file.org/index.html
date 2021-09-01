@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+    <link rel="icon" href="/avatar.jpg">
+  
+    
+  <title>执行当前 buffer 中的源代码 | 科学君的不科学博客</title>
+  
+<link rel="stylesheet" href="/style.css">
+
+  
+<link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://tajs.qq.com/stats?sId=65546304" charset="UTF-8"></script>
+  <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="科学君的不科学博客" type="application/atom+xml">
+</head>
+
+<body>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>科学君的不科学博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/atom.xml" class="item-link">FEED 订阅</a>
+          
+        </li>
+      
+    </ul>
+  </div>
+</header>
+
+  <main id='post'>
+  <div class="content">
+    <article>
+      <section class="content markdown-body">
+        <h1>执行当前 buffer 中的源代码</h1>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <time>2016年09月21日</time>
+          
+          | <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+  </div>
+
+
+
+          
+          
+          |
+          
+          <i class="fa fa-tag" aria-hidden="true"></i>
+          
+          
+  <a href="/tags/#emacs" class='tag'>emacs</a>
+
+
+          
+        </div>
+        <ul>
+<li><a href="#sec-">正文</a></li>
+<li><a href="#sec-">TIPS</a></li>
+</ul>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文<a id="sec-"></a></h1><p>Xah Lee 写过一个<a target="_blank" rel="noopener" href="http://ergoemacs.org/emacs/elisp_run_current_file.html">函数</a>， 可以执行当前 buffer 中的源代码。如果是解释执行的程序，则调用相应的 编译器/解释器，如果是编译执行的，则先编译代码，然后执行编译之后的程序。但是这个函数有一些缺陷， 如果代码有错误导致编译无法完成，这个函数仍然会尝试运行程序。我对它做了一些修改，如果编译不成功， 则不会运行程序；如果编译成功，则会在新的 buffer 中运行程序，这个 buffer 会在 <code>*compilation*</code> 的窗口中显示，覆盖原来的 buffer。代码如下（我还加上的编译 c++的支持）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">;;; -----------liu233w/run-current-file-------------------</span><br><span class="line">(defun liu233w/run-current-file ()</span><br><span class="line">  &quot;Execute the current file.</span><br><span class="line">For example, if the current buffer is the file x.py, then it&#x27;ll call「python x.py」in a shell.</span><br><span class="line">The file can be Emacs Lisp, PHP, Perl, Python, Ruby, JavaScript, Bash, Ocaml, Visual Basic, TeX, Java, Clojure.</span><br><span class="line">File suffix is used to determine what program to run.</span><br><span class="line"></span><br><span class="line">If the file is modified or not saved, save it automatically before run.</span><br><span class="line"></span><br><span class="line">URL `http://ergoemacs.org/emacs/elisp_run_current_file.html&#x27;</span><br><span class="line">version 2016-01-28&quot;</span><br><span class="line">  (interactive)</span><br><span class="line">  (let (</span><br><span class="line">        (-suffix-map</span><br><span class="line">         ;; (‹extension› . ‹shell program name›)</span><br><span class="line">         `(</span><br><span class="line">           (&quot;php&quot; . &quot;php&quot;)</span><br><span class="line">           (&quot;pl&quot; . &quot;perl&quot;)</span><br><span class="line">           (&quot;py&quot; . &quot;python&quot;)</span><br><span class="line">           (&quot;py3&quot; . ,(if (string-equal system-type &quot;windows-nt&quot;) &quot;python.exe&quot; &quot;python3&quot;))</span><br><span class="line">           (&quot;rb&quot; . &quot;ruby&quot;)</span><br><span class="line">           (&quot;go&quot; . &quot;go run&quot;)</span><br><span class="line">           (&quot;js&quot; . &quot;node&quot;) ; node.js</span><br><span class="line">           (&quot;sh&quot; . &quot;bash&quot;)</span><br><span class="line">           (&quot;clj&quot; . &quot;java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main&quot;)</span><br><span class="line">           (&quot;rkt&quot; . &quot;racket&quot;)</span><br><span class="line">           (&quot;ml&quot; . &quot;ocaml&quot;)</span><br><span class="line">           (&quot;vbs&quot; . &quot;cscript&quot;)</span><br><span class="line">           (&quot;tex&quot; . &quot;pdflatex&quot;)</span><br><span class="line">           (&quot;latex&quot; . &quot;pdflatex&quot;)</span><br><span class="line">           (&quot;java&quot; . &quot;javac&quot;)</span><br><span class="line">           (&quot;cpp&quot; . ,(or (executable-find &quot;myclang&quot;)</span><br><span class="line">                         (executable-find &quot;clang&quot;)</span><br><span class="line">                         &quot;g++&quot;))</span><br><span class="line">           ;; (&quot;pov&quot; . &quot;/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640&quot;)</span><br><span class="line">           ))</span><br><span class="line"></span><br><span class="line">        -fname</span><br><span class="line">        -fSuffix</span><br><span class="line">        -prog-name</span><br><span class="line">        -cmd-str)</span><br><span class="line"></span><br><span class="line">    (when (null (buffer-file-name)) (save-buffer))</span><br><span class="line">    (when (buffer-modified-p) (save-buffer))</span><br><span class="line"></span><br><span class="line">    (setq -fname (buffer-file-name))</span><br><span class="line">    (setq -fSuffix (file-name-extension -fname))</span><br><span class="line">    (setq -prog-name (cdr (assoc -fSuffix -suffix-map)))</span><br><span class="line">    (setq -cmd-str (concat -prog-name &quot; \&quot;&quot;   -fname &quot;\&quot;&quot;))</span><br><span class="line"></span><br><span class="line">    (cond</span><br><span class="line">     ((string-equal -fSuffix &quot;el&quot;) (load -fname))</span><br><span class="line">     ((string-equal -fSuffix &quot;java&quot;)</span><br><span class="line">      (liu233w//compile-and-run</span><br><span class="line">       -cmd-str</span><br><span class="line">       (format &quot;java %s&quot; (file-name-sans-extension (file-name-nondirectory -fname)))))</span><br><span class="line">     ((string-equal -fSuffix &quot;cpp&quot;)</span><br><span class="line">      (liu233w//compile-and-run</span><br><span class="line">       (format &quot;%s --std=c++11&quot; -cmd-str)</span><br><span class="line">       &quot;a&quot;))</span><br><span class="line">     (t (if -prog-name</span><br><span class="line">            (progn</span><br><span class="line">              (message &quot;Running…&quot;)</span><br><span class="line">              (async-shell-command -cmd-str &quot;*liu233w/run-current-file output*&quot; ))</span><br><span class="line">          (message &quot;No recognized program file suffix for this file.&quot;))))))</span><br><span class="line"></span><br><span class="line">(defun liu233w//compile-and-run (cmp-cmd run-cmd)</span><br><span class="line">  &quot;Run cmp-cmd, if success, then run run-cmd and print the result.</span><br><span class="line">Or just print the error message.</span><br><span class="line"></span><br><span class="line">When it&#x27;s compiling a file, this function may cause error behavior.&quot;</span><br><span class="line">  (setf liu233w//compile-status (cons run-cmd compile-command))</span><br><span class="line">  (compile cmp-cmd)</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">(defvar liu233w//compile-status nil &quot;doc&quot;)</span><br><span class="line"></span><br><span class="line">(defun liu233w//run-after-compile (buffer string)</span><br><span class="line">  (when (and</span><br><span class="line">         (string-match &quot;compilation&quot; (buffer-name buffer))</span><br><span class="line">         (string-match &quot;finished&quot; string)</span><br><span class="line">         liu233w//compile-status)</span><br><span class="line">    ;; 防止 liu233w/bury-compile-buffer-if-successful 删除 compilation buffer</span><br><span class="line">    ;; 这样 async-shell-command 命令就能覆盖 compilation buffer 而不是源代码的</span><br><span class="line">    ;; buffer 了。</span><br><span class="line">    (with-current-buffer &quot;*compilation*&quot;</span><br><span class="line">      (insert &quot;warning LOL&quot;))</span><br><span class="line">    (async-shell-command (car liu233w//compile-status)</span><br><span class="line">                         &quot;*liu233w/run-current-file output*&quot;)</span><br><span class="line">    (setf compile-command (cdr liu233w//compile-status)</span><br><span class="line">          liu233w//compile-status nil)))</span><br><span class="line">(add-hook &#x27;compilation-finish-functions</span><br><span class="line">          #&#x27;liu233w//run-after-compile)</span><br><span class="line">;;; END -----------liu233w/run-current-file-------------------</span><br></pre></td></tr></table></figure>
+
+<p>理论上这个函数没法在编译还没完成的时候运行，但我也没测试过。</p>
+<p>另外，我还找到了另一段代码，可以在编译结果没有 error 或 warning 的时候自动关闭 <code>*compilation*</code> buffer。不过如果想要把这段代码搭配 <code>run-current-file</code> 运行的话需要把函数加到 hook 的最后，而不 是前面。我的代码也是通过在 <code>*compilation*</code> buffer 写入 warning 的文字来阻止这段代码关闭相应的 窗口从而令程序的运行结果显示在原来显示编译状态的位置的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">;;; from http://stackoverflow.com/questions/11043004/emacs-compile-buffer-auto-close</span><br><span class="line">(defun liu233w/bury-compile-buffer-if-successful (buffer string)</span><br><span class="line">  &quot;Bury a compilation buffer if succeeded without warnings &quot;</span><br><span class="line">  (if (and</span><br><span class="line">       (string-match &quot;compilation&quot; (buffer-name buffer))</span><br><span class="line">       (string-match &quot;finished&quot; string)</span><br><span class="line">       (not</span><br><span class="line">        (with-current-buffer buffer</span><br><span class="line">          (goto-char (point-min))</span><br><span class="line">          (search-forward &quot;warning&quot; nil t))))</span><br><span class="line">      (run-with-timer 1 nil</span><br><span class="line">                      (lambda (buf)</span><br><span class="line">                        (bury-buffer buf)</span><br><span class="line">                        (delete-window (get-buffer-window buf)))</span><br><span class="line">                      buffer)))</span><br><span class="line">(add-hook &#x27;compilation-finish-functions</span><br><span class="line">          #&#x27;liu233w/bury-compile-buffer-if-successful</span><br><span class="line">          t)</span><br></pre></td></tr></table></figure>
+
+<h1 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS<a id="sec-"></a></h1><ul>
+<li>  <code>add-hook</code> 函数有一个可选形参 <code>:append</code> ，为 t 时相应的函数将加到 hook 的最后，而不是最前面。</li>
+</ul>
+
+      </section>
+      <div class="license">
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license" target="_blank">
+          <img src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" style="border-width:0"
+               alt="Creative Commons License" class="center">
+        </a>
+      </div>
+      <p>
+        本作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">
+          署名-相同方式共享 4.0 国际
+        </a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        “不科学的科学君” (Liu233w) 与博客链接：
+        <a href="https://liu233w.github.io">https://liu233w.github.io</a>
+        ，基于本文修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:wwwlsmcom@outlook.com" target="_blank">与我联系</a>
+        。
+      </p>
+    </article>
+    
+    <!-- disqus 评论框 start -->
+    <div class="comment">
+      <div id="disqus_thread" class="disqus-thread">
+        <i>加载评论框需要翻墙</i>
+      </div>
+    </div>
+    <!-- disqus 评论框 end -->
+    
+    
+    <!-- livere 评论框 start -->
+    <div class="comment">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTE5NS8xMTczMA=="></div>
+    </div>
+    <!-- livere 评论框 end -->
+    
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+      <h1>目录</h1>
+      <div class="content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">正文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TIPS"><span class="toc-number">2.</span> <span class="toc-text">TIPS</span></a></li></ol>
+      </div>
+    </div>
+    
+  </aside>
+</main>
+
+<!-- disqus 公共JS代码 -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES * * */
+  var disqus_shortname = "liu233w";
+  var disqus_identifier = "https://liu233w.github.io/2016/09/21/run-current-file.org/";
+  var disqus_url = "https://liu233w.github.io/2016/09/21/run-current-file.org/";
+
+  isAgent(getDisqus)
+
+  // determine user agent in China
+  function isAgent(cb) {
+    var url = '//graph.facebook.com/feed?callback=h';
+    var xhr = new XMLHttpRequest();
+    var called = false;
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        called = true;
+        cb(true);
+      }
+    };
+    xhr.send();
+    // timeout 1s, this facebook API is very fast.
+    setTimeout(function () {
+      if (!called) {
+        xhr.abort();
+        cb(false)
+      }
+    }, 1000);
+  }
+
+  function getDisqus(isAgent) {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq)
+  }
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+<script type="text/javascript">
+  (function (d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+
+    if (typeof LivereTower === 'function') {
+      return;
+    }
+
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2021 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/lib/in-view.min.js"></script>
+
+
+<script src="/lib/lodash.min.js"></script>
+
+<script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
+
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
+      
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
+
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
+
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
+
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
+</script>
+
+<script src="/lib/jquery.fancybox.min.js"></script>
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>
